@@ -1,8 +1,12 @@
 # Music Mixer Project by Russell and Jin
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 This repo contains the submission for MMED-1055 Music Mixer project by Russell & Jin.  
+=======
+This repo contains the submission for MMED-1055 Music Mixer project by Russell & Jin.
+>>>>>>> Stashed changes
 =======
 This repo contains the submission for MMED-1055 Music Mixer project by Russell & Jin.
 >>>>>>> Stashed changes
@@ -13,8 +17,11 @@ This repo contains the submission for MMED-1055 Music Mixer project by Russell &
 NEED TO EDIT DETAILS
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 Feel free to explore the design as part of the assignment.
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 ## Installation 💻
