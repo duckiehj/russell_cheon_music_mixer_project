@@ -1,0 +1,31 @@
+/* the final look will definitely look completely different from this layout! */
+
+body {
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+#mixer, #tray {
+    text-align: left;
+}
+
+.height-1 {
+    height: 100px;
+}
+
+.audio-icon {
+    font-size: 3rem;
+    display: inline;
+}
+
+.hide {
+    display: none;
+}
