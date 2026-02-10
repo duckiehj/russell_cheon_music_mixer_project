@@ -5,7 +5,6 @@ body {
 }
 
 h1 {
-    text-align: center;
     margin-bottom: 2rem;
 }
 
@@ -24,6 +23,7 @@ section {
 .audio-icon {
     font-size: 3rem;
     display: inline;
+    cursor: pointer;
 }
 
 .hide {
