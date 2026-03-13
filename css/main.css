@@ -4,28 +4,52 @@ body {
     font-family: 'Lato', Arial, sans-serif;
 }
 
-h1 {
-    margin-bottom: 2rem;
+
+
+#main-container {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 4vw 0;
+    min-width: 840px;
+    background-color: antiquewhite;
 }
 
-section {
-    margin-bottom: 2rem;
+#game-area {
+    background-color: aquamarine;
+    min-width: 538px;
+    width: 63vw;
 }
 
-#mixer, #tray {
-    text-align: left;
+#sidebar {
+    min-width: 269px;
+    width: 31vw;
 }
 
-.height-1 {
-    height: 100px;
-}
 
-.audio-icon {
-    font-size: 3rem;
-    display: inline;
-    cursor: pointer;
-}
+#sample {
+    h1 {
+        margin-bottom: 2rem;
+    }
 
-.hide {
-    display: none;
+    section {
+        margin-bottom: 2rem;
+    }
+
+    #mixer, #tray {
+        text-align: left;
+    }
+
+    .height-1 {
+        height: 100px;
+    }
+
+    .audio-icon {
+        font-size: 3rem;
+        display: inline;
+        cursor: pointer;
+    }
+
+    .hide {
+        display: none;
+    }
 }
