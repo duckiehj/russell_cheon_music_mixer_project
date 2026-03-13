@@ -49,7 +49,8 @@ body {
 #control-deck {
     grid-area: 1/-1;
     align-self: end;
-    display: grid;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     z-index: 2;
     background-image: url(../images/board.svg);
@@ -61,13 +62,12 @@ body {
     #main-board {
         width: 54%;
         height: max-content;
-        grid-area: 1/-1;
         display: grid;
         align-items: center;
         margin: 4% auto;
     }
 
-    #main-board object {
+    #board-paper {
         grid-area: 1/-1;
     }
 
@@ -89,18 +89,16 @@ body {
             margin-right: 3%;
         }
 
-
-    #audio-con {
-        display: flex;
-        grid-area: 1/-1;
-        justify-content: space-between;
-    }
     
     .audio-ctrl {
         display: flex;
         justify-content: center;
-        background-color: aqua;
+        /*background-color: aqua;*/
         width: 20%;
+    }
+
+    .audio-ctrl:has(#play-btn) {
+        order: -1;
     }
 
     .audio-ctrl button {
@@ -109,9 +107,10 @@ body {
         cursor: pointer;
     }
 
-    .audio-btn {
+    .audio-icon {
         max-width: 5vw;
         width: 100%;
+        pointer-events: none;
     }
 
 
