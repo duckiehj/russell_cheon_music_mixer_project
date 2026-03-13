@@ -32,27 +32,90 @@ body {
     width: 100%;
     aspect-ratio: 1.442/1;
     margin-top: 20px;
-    background-image: linear-gradient(#77C2FC 0%, #D5EEFF 40%);
+    background-image: linear-gradient(#77C2FC 0%, #D5EEFF 15%);
 }
 
 #sea-bg {
     display: grid;
     background-image: url(../images/sea-bg.svg);
-    background-position: bottom;
+    background-position: top;
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
 }
 
-#main-board {
+
+
+#control-deck {
     grid-area: 1/-1;
     align-self: end;
-    z-index: 5;
+    display: grid;
+    align-items: center;
+    z-index: 2;
     background-image: url(../images/board.svg);
     background-size: cover;
     height: 36%;
     margin: 0;
 }
+
+    #main-board {
+        width: 54%;
+        height: max-content;
+        grid-area: 1/-1;
+        display: grid;
+        align-items: center;
+        margin: 4% auto;
+    }
+
+    #main-board object {
+        grid-area: 1/-1;
+    }
+
+        #icon-con {
+            grid-area: 1/-1;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            /*background-color: aquamarine;*/
+            margin-left: 5%;
+            width: 82%;
+            height: 60%;
+
+        }
+
+        #icon-con img {
+            max-width: 20%;
+            max-height: 100%;
+            margin-right: 3%;
+        }
+
+
+    #audio-con {
+        display: flex;
+        grid-area: 1/-1;
+        justify-content: space-between;
+    }
+    
+    .audio-ctrl {
+        display: flex;
+        justify-content: center;
+        background-color: aqua;
+        width: 20%;
+    }
+
+    .audio-ctrl button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .audio-btn {
+        max-width: 5vw;
+        width: 100%;
+    }
+
+
+
 
 #drop-area {
     grid-area: 1/-1;
@@ -62,21 +125,40 @@ body {
     justify-content: space-around;
     align-content: space-between;
     align-items: start;
-    background-color: rgba(127, 255, 212, 0.323);
+    /*background-color: rgba(127, 255, 212, 0.323);*/
+    padding-top: 3%;
     width: 67%;
-    height: 70%;
+    height: 63%;
 }
+    #drop-area > #main-dj-dz {
+        height: 50%;
+    }
 
-#drop-area > span {
-    display: block;
-    height: 42%;
-    width: 30%;
-    background-color: blue;
-}
+    .drop-zone {
+        display: grid;
+        height: 40%;
+        width: 30%;
+        justify-items: center;
+        align-items: end;
+    }
+        .drop-zone::after{
+            display: inline;
+            content: "";
+            grid-area: 1/-1;
+            width: 90%;
+            height: 30%;
+            border-radius: 50%;
+            background-color: #0D8FED;
+        }
+        .drop-zone img {
+            grid-area: 1/-1;
+            width: 90%;
+            margin-bottom: 15%;
+            z-index: 2;
+        }
 
-#drop-area > #main-dj-dz {
-    height: 55%;
-}
+
+
 
 #sample {
     h1 {
