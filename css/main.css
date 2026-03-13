@@ -36,9 +36,7 @@ body {
 }
 
 #sea-bg {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
+    display: grid;
     background-image: url(../images/sea-bg.svg);
     background-position: bottom;
     background-repeat: no-repeat;
@@ -47,10 +45,37 @@ body {
 }
 
 #main-board {
+    grid-area: 1/-1;
+    align-self: end;
+    z-index: 5;
     background-image: url(../images/board.svg);
     background-size: cover;
     height: 36%;
     margin: 0;
+}
+
+#drop-area {
+    grid-area: 1/-1;
+    justify-self: center;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
+    align-content: space-between;
+    align-items: start;
+    background-color: rgba(127, 255, 212, 0.323);
+    width: 67%;
+    height: 70%;
+}
+
+#drop-area > span {
+    display: block;
+    height: 42%;
+    width: 30%;
+    background-color: blue;
+}
+
+#drop-area > #main-dj-dz {
+    height: 55%;
 }
 
 #sample {
