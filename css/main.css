@@ -15,7 +15,7 @@ body {
 }
 
 #main-box {
-    background-color: aquamarine;
+    background-color: transparent;
     min-width: 538px;
     padding-top: 15px;
     width: 63vw;
@@ -91,20 +91,21 @@ body {
 
     
     .audio-ctrl {
-        display: flex;
-        justify-content: center;
-        /*background-color: aqua;*/
         width: 20%;
+        margin-inline: 2%;
     }
 
     .audio-ctrl:has(#play-btn) {
         order: -1;
+        display: grid;
+        place-items: center;
     }
 
     .audio-ctrl button {
         background-color: transparent;
         border: none;
         cursor: pointer;
+        display: block;
     }
 
     .audio-icon {
@@ -113,6 +114,19 @@ body {
         pointer-events: none;
     }
 
+
+    #play-btn {
+        border-radius: 50%;
+    }
+
+    #rew-btn {
+        margin: 0 auto;
+    }
+
+    #volume-slider {
+        display: block;
+        width: 100%;
+    }
 
 
 
