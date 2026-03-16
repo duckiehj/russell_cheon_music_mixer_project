@@ -13,6 +13,7 @@ const rewindBtn = document.querySelector("#rew-btn");
 
 const playIcon = document.querySelector("#play-icon");
 const pauseIcon = document.querySelector("#pause-icon");
+const volSlider = document.querySelector("vol-slider");
 
 const audioElements = [];
 
@@ -104,6 +105,12 @@ function rewindAudio() {
     })
 }
 
+function setVolume() {
+    audioElements.forEach((elem) => {
+        elem.volume = this.value/100;
+    })
+}
+
 // Event Listener
 chars.forEach((elem) => {
     elem.addEventListener("dragstart", dragStart);
@@ -121,3 +128,4 @@ board.addEventListener("drop", dropBack);
 
 playBtn.addEventListener("click", playPauseAudio);
 rewindBtn.addEventListener("click", rewindAudio);
+volSlider.addEventListener("change", setVolume);
