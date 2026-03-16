@@ -13,7 +13,7 @@ const rewindBtn = document.querySelector("#rew-btn");
 
 const playIcon = document.querySelector("#play-icon");
 const pauseIcon = document.querySelector("#pause-icon");
-const volSlider = document.querySelector("vol-slider");
+const volSlider = document.querySelector("#vol-slider");
 
 const audioElements = [];
 
@@ -80,6 +80,7 @@ function startAudio(elem) {
    audioItem.src = `audio/${audioFile}`;
    audioItem.id = `${elem.id}-audio`;
    audioItem.load();
+   audioItem.volume = volSlider.value/100;
    audioItem.play();
    
    mainbox.appendChild(audioItem);
@@ -89,12 +90,12 @@ function playPauseAudio() {
     audioElements.forEach((elem) => {
         if(elem.paused){
             elem.play();
-            playIcon.classList.toggle("st3");
-            pauseIcon.classList.toggle("st3");
+            playIcon.classList.toggle("st7");
+            pauseIcon.classList.toggle("st7");
         } else {
             elem.pause();
-            playIcon.classList.toggle("st3");
-            pauseIcon.classList.toggle("st3");
+            playIcon.classList.toggle("st7");
+            pauseIcon.classList.toggle("st7");
         }
     })
 }
@@ -107,7 +108,7 @@ function rewindAudio() {
 
 function setVolume() {
     audioElements.forEach((elem) => {
-        elem.volume = this.value/100;
+        elem.volume = volSlider.value/100;
     })
 }
 

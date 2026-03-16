@@ -122,16 +122,22 @@ body {
 
 
     #play-btn {
+        margin-top: 15%;
         width: 70%;
         border-radius: 80%;
         background-color: #4F2826;
     }
-        #play-btn-svg .st0{fill:#281F18;}
-        #play-btn-svg .st1{fill:#FDDE01;}
-        #play-btn-svg .st2{fill:#A99105;}
-        #play-btn-svg .st3{display:none;}
-        #play-btn-svg .st4{display:inline;fill:#A99105;}
-        #play-btn-svg .st5{display:inline;fill:#FDDE01;}
+        #play-btn-svg {
+            .st0{fill:#3B2E2A;}
+            .st1{fill:#B87638;}
+            .st2{fill:#A0AFB0;}
+            .st3{fill:#845429;}
+            .st4{opacity:0.16;fill:#101010;enable-background:new    ;}
+            .st5{fill:#9E5A2A;}
+            .st6{fill:#FFB57D;}
+            .st7{display:none;}
+            .st8{display:inline;}
+        }
 
 
 
