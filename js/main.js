@@ -15,7 +15,7 @@ const rewindBtn = document.querySelector("#rewind-btn");
 
 // functions
 function dragStart() {
-   console.log(`you are dragging ${this.textContent}`);
+   console.log(`you are dragging ${this.id}`);
    dragItem = this;
    setTimeout(visibleDrag,0);
 }
