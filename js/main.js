@@ -62,6 +62,8 @@ function dropBack(e) {
     audioElements.forEach((elem) => {
         if(elem.id == `${dragItem.id}-audio`) {
             elem.remove();
+            let i = audioElements.indexOf(elem);
+            audioElements.splice(i,1);
         }
     })
 }
