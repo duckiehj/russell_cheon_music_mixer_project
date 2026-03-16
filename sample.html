@@ -18,7 +18,11 @@
     <main class="grid-con centered">
         <section class="grid-con col-span-full">
             <h2 class="col-span-full">Music Mixer Area</h2>
-            <div id="mixer" class="box height-1 col-span-full m-col-span-6">
+            <div id="song" class="box height-1 col-span-1 m-col-span-2">
+
+            </div>
+
+            <div id="mixer" class="box height-1 col-span-3 m-col-span-4">
 
             </div>
 
@@ -27,13 +31,24 @@
 
         <section class="grid-con col-span-full">
             <h2 class="col-span-full">Audio Tray</h2>
+            <audio src="audio/music-1.mp3" id="music-audio" loop></audio>
             <div id="tray" class="box height-1 col-span-full m-col-span-6">
-                <div draggable="true" id="audio-1" class="audio-icon">🔊</div>            
-                <div draggable="true" id="audio-3"  class="audio-icon">⛵</div>      
-                <div draggable="true" id="audio-4"  class="audio-icon">🐚</div>  
+                <div draggable="true" id="music-1" data-audio="music-1.mp3" data-audio-type="song" class="audio-icon"></div>            
+                <div draggable="true" id="music-3" data-audio="music-3.mp3" data-audio-type="song"  class="audio-icon"></div>      
+                <div draggable="true" id="music-4" data-audio="music-4.mp3" data-audio-type="song" class="audio-icon"></div>  
+                <div draggable="true" id="music-5" data-audio="music-5.mp3" data-audio-type="song" class="audio-icon"></div>  
+
+                <div draggable="true" id="dolphin" data-audio="dolphin.mp3" data-audio-type="sound" class="audio-icon"></div>  
+                <div draggable="true" id="ship" data-audio="polar_bear.mp3" data-audio-type="sound" class="audio-icon"></div>  
             </div>
 
-        </section>        
+        </section>   
+        
+        <section class="grid-con col-span-full" id="audio-controls">
+            <button id="play-btn" class="audio-btn"></button>
+            <button id="stop-btn" class="audio-btn"></button>
+            <button id="rewind-btn" class="audio-btn"></button>
+        </section>
     </main>
 
 

@@ -12,20 +12,127 @@ section {
     margin-bottom: 2rem;
 }
 
-#mixer, #tray {
-    text-align: left;
-}
-
 .height-1 {
+    display: flex;
+    align-items: center;
     height: 100px;
 }
 
+#song {
+    justify-content: center;
+    background-color: blueviolet;
+}
+
+#mixer {
+    justify-content: start;
+    background-color: cornflowerblue;
+}
+
+
 .audio-icon {
-    font-size: 3rem;
-    display: inline;
+    display: grid;
+    place-items: center;
+    font-size: 2rem;
+    background-size: 150%;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 3rem;
+    aspect-ratio: 1/1;
     cursor: pointer;
+    margin-right: 1.5rem;
+}
+
+#song .audio-icon {
+    margin-right: 0;
+    width: 4rem;
+}
+
+.audio-icon[data-audio-type="song"] {
+    background-color: blueviolet;
+}
+
+.audio-icon[data-audio-type="sound"] {
+    background-color: cornflowerblue;
 }
 
 .hide {
     display: none;
+}
+
+#audio-controls {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#play-btn {
+    background-image: url(../images/play_button.svg);
+    background-size: 200%;
+    background-position: 50% 50%;
+    border-radius: 50%;
+}
+
+#stop-btn {
+    background-image: url(../images/stop_button.svg);
+}
+
+#rewind-btn {
+    background-image: url(../images/play_button.svg);
+    transform: scaleX(-1);
+}
+
+.audio-btn {
+    border: none;
+    background-repeat: no-repeat;
+    width: 132px;
+    height: 132px;
+    background-size: 105%;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.btn-play {
+    background-color: aqua;
+}
+
+.btn-pause {
+    background-color: lightcoral;
+}
+
+#dolphin {
+    background-image: url(../images/pink_dolphin_icon.svg);
+}
+
+#ship {
+    background-image: url(../images/otter_icon.svg);
+    background-size: 250%;
+}
+
+
+
+#music-1 {
+    background-image: url(../images/seal_icon.svg);
+}
+#song #music-1 {
+    background-image: url(../images/seal.svg);
+}
+
+#music-4 {
+    background-image: url(../images/octo_icon.svg);
+}
+#song #music-4 {
+    background-image: url(../images/octo.svg);
+}
+
+#music-3 {
+    background-image: url(../images/shark_icon.svg);
+}
+#song #music-3 {
+    background-image: url(../images/shark.svg);
+}
+
+#music-5 {
+    background-image: url(../images/whale_icon.svg);
+}
+#song #music-5 {
+    background-image: url(../images/whale.svg);
 }
