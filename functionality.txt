@@ -11,26 +11,14 @@ audio plays once dragged
 
 Characters:
 There are two types of characters.
-First, users need to select one DJ character who plays the main song.
+First, users need to select an instrument for the DJ who plays the main song.
 After that, they will drag in 4 other band members who will sing the accompanied noises
 In total there are 5 slots (1 for main DJ, 4 for others)
 
 List of Characters:
-DJ/Front members:
-OCTOPUS - PIANO/ORGAN PLAYER - Wellerman (Pago95 - Wikipedia)
-SEAL - MANDOLIN PLAYER - A Pirate's Life For Me (vgmusic.com)
-SEA OTTER - ACCORDION PLAYER - Drunken Sailor (jazman79 - musescore.com)
-PENGUIN - SAXOPHONE PLAYER - Beyond the Sea (Anonymous Composer - musescore.com)
 
-Band members:
-PARROT (on a BOAT) // I already drew the boat so now we only need the parrot on it
-DOLPHIN
-ICEBERG
-POLAR BEAR - DRUMMER
-CONCH SHELL
-SUBMARINE // basically a telescope or something
-WHALE
-SEAGULL
+Minigame:
+Click the ? button on the sidebar to activate a mini game involving a boss character asking questions
 
 Game Controls:
 RESTART GAME
@@ -39,8 +27,7 @@ HOW TO PLAY BUTTON
 
 Audio Controls
 PLAY/PAUSE/STOP
-SPECIFIC VOLUME
-REWIND TO START
-2X SPEED AUDIO
 MASTER VOLUME
+REWIND TO START
+MUTE/SOLO A CHARACTER
 
