@@ -114,6 +114,10 @@ function setVolume() {
     })
 }
 
+function clickBrighten() {
+    rewindBtn.classList.toggle("clicked");
+}
+
 // Event Listener
 chars.forEach((elem) => {
     elem.addEventListener("dragstart", dragStart);
@@ -132,3 +136,4 @@ board.addEventListener("drop", dropBack);
 playBtn.addEventListener("click", playPauseAudio);
 rewindBtn.addEventListener("click", rewindAudio);
 volSlider.addEventListener("change", setVolume);
+
