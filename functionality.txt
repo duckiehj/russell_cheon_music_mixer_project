@@ -1,0 +1,46 @@
+functionality - music mixer
+
+Basic Functionality:
+
+drag an animal icon from a map to the band zones
+
+once dragged, the icon becomes or is replaced by a band member
+
+audio plays once dragged
+
+
+Characters:
+There are two types of characters.
+First, users need to select one DJ character who plays the main song.
+After that, they will drag in 4 other band members who will sing the accompanied noises
+In total there are 5 slots (1 for main DJ, 4 for others)
+
+List of Characters:
+DJ/Front members:
+OCTOPUS - PIANO/ORGAN PLAYER - Wellerman (Pago95 - Wikipedia)
+SEAL - MANDOLIN PLAYER - A Pirate's Life For Me (vgmusic.com)
+SEA OTTER - ACCORDION PLAYER - Drunken Sailor (jazman79 - musescore.com)
+PENGUIN - SAXOPHONE PLAYER - Beyond the Sea (Anonymous Composer - musescore.com)
+
+Band members:
+PARROT (on a BOAT) // I already drew the boat so now we only need the parrot on it
+DOLPHIN
+ICEBERG
+POLAR BEAR - DRUMMER
+CONCH SHELL
+SUBMARINE // basically a telescope or something
+WHALE
+SEAGULL
+
+Game Controls:
+RESTART GAME
+HOW TO PLAY BUTTON
+(PAUSE GAME)
+
+Audio Controls
+PLAY/PAUSE/STOP
+SPECIFIC VOLUME
+REWIND TO START
+2X SPEED AUDIO
+MASTER VOLUME
+
