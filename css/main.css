@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Lato', Arial, sans-serif;
+    background-color: antiquewhite;
 }
 
 
@@ -11,7 +12,6 @@ body {
     justify-content: space-evenly;
     padding: 2vw 0;
     min-width: 840px;
-    background-color: antiquewhite;
 }
 
 #main-box {
