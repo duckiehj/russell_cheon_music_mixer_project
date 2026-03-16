@@ -18,20 +18,19 @@
             <div id="game-area">
                 <div id="sea-bg">
                     <div id="drop-area">
-                        <span class="drop-zone"></span>
-                        <span class="drop-zone" id="main-dj-dz">
-                            <img src="images/seal.svg" alt="seal">
-                        </span>
-                        <span class="drop-zone"></span>
-                        <span class="drop-zone"></span>
-                        <span class="drop-zone"></span>
+                        <div class="drop-zone"></div>
+                        <div class="drop-zone" id="main-dj-dz"></div>
+                        <div class="drop-zone"></div>
+                        <div class="drop-zone"></div>
+                        <div class="drop-zone"></div>
                     </div>
                     <div id="control-deck">
                         <div id="main-board">
                             <object id="board-paper" data="images/main-board.svg" type="image/svg+xml"></object>
                             <div id="icon-con">
-                                <img src="images/ahoy.svg" alt="otter">
-                                <img src="images/seal-icon.svg" alt="otter">
+                                <span draggable="true" data-audio="ship.mp3" class="band icon" id="ship"></span>
+                                <span draggable="true" data-audio="seal.mp3" class="band icon" id="seal"></span>
+								<span draggable="true" data-audio="pink_whale.mp3" class="band icon" id="pink-whale"></span>
                             </div>
                         </div>
 

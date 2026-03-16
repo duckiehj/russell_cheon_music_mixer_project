@@ -85,10 +85,14 @@ body {
 
         }
 
-        #icon-con img {
-            max-width: 20%;
-            max-height: 100%;
+        .icon {
+            width: 17%;
+            height: 60%;
             margin-right: 3%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            background-color: #0D8FED;
         }
 
     
@@ -178,49 +182,58 @@ body {
         justify-items: center;
         align-items: end;
     }
-        .drop-zone::after{
+
+        .drop-zone::before{
             display: inline;
             content: "";
             grid-area: 1/-1;
             width: 90%;
             height: 30%;
             border-radius: 50%;
+            opacity: 100%;
             background-color: #0D8FED;
         }
-        .drop-zone img {
+        .char {
             grid-area: 1/-1;
             width: 90%;
-            margin-bottom: 15%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-position: 50% 80%;
             z-index: 2;
         }
 
 
-
-
-#sample {
-    h1 {
-        margin-bottom: 2rem;
-    }
-
-    section {
-        margin-bottom: 2rem;
-    }
-
-    #mixer, #tray {
-        text-align: left;
-    }
-
-    .height-1 {
-        height: 100px;
-    }
-
-    .audio-icon {
-        font-size: 3rem;
-        display: inline;
-        cursor: pointer;
-    }
-
-    .hide {
-        display: none;
-    }
+#ship {
+    background-image: url(../images/ship.svg);
 }
+
+#seal {
+    background-image: url(../images/seal.svg);
+}
+
+#pink-whale {
+    background-image: url(../images/pink-dolphin.svg);
+}
+
+
+#ship.icon {
+    background-image: url(../images/ahoy.svg);
+}
+
+#seal.icon {
+    background-image: url(../images/seal-icon.svg);
+}
+
+#pink-whale.icon {
+    background-image: url(../images/pink-dolphin-icon.svg);
+}
+
+.selected {
+    animation: selected 0.5s infinite;
+}
+
+@keyframes selected {
+    30%{transform: translateY(2%);}
+    70%{transform: translateY(-2%);}
+}
+
