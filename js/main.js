@@ -4,7 +4,7 @@ console.log('JS file connected');
 const board = document.querySelector("#main-board");
 const dropZones = document.querySelectorAll(".drop-zone");
 const iconZone = document.querySelector("#icon-con");
-const mainbox = document.querySelector("#main-box");
+const mainbox = document.querySelector("body");
 
 const chars = document.querySelectorAll(".band");
 
@@ -15,11 +15,14 @@ const playIcon = document.querySelector("#play-icon");
 const pauseIcon = document.querySelector("#pause-icon");
 const volSlider = document.querySelector("#vol-slider");
 
+const volumeInd = document.querySelector("#volume-ind-bg");
+
 const audioElements = [];
 
 let dragItem = null;
 let selected = null;
 let audioNum = 0;
+
 
 
 // Functions
@@ -54,7 +57,7 @@ function dropAudio(e) {
 
 function dropBack(e) {
     e.preventDefault();
-    console.log(`${dragItem.id} was dropped back to start`);
+    //console.log(`${dragItem.id} was dropped back to start`);
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("char");   
     dragItem.classList.add("icon"); 
@@ -109,9 +112,15 @@ function rewindAudio() {
 }
 
 function setVolume() {
+    changeVolumeBar();
     audioElements.forEach((elem) => {
         elem.volume = volSlider.value/100;
     })
+    console.log("volume is now: " + volSlider.value);
+}
+
+function changeVolumeBar() {
+    volumeInd.setAttribute("width", volSlider.value*185/100);
 }
 
 function clickBrighten() {
@@ -119,6 +128,7 @@ function clickBrighten() {
 }
 
 // Event Listener
+
 chars.forEach((elem) => {
     elem.addEventListener("dragstart", dragStart);
     elem.addEventListener("dragend", visibleDrag);    
@@ -136,4 +146,6 @@ board.addEventListener("drop", dropBack);
 playBtn.addEventListener("click", playPauseAudio);
 rewindBtn.addEventListener("click", rewindAudio);
 volSlider.addEventListener("change", setVolume);
+
+window.addEventListener("load", changeVolumeBar);
 
