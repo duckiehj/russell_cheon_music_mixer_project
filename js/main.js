@@ -58,6 +58,8 @@ function dropAudio(e) {
     dragItem.classList.add("char");
 
     startAudio(dragItem);
+    pauseIcon.classList.remove("st7");
+    playIcon.classList.add("st7");
 }
 
 // revert the character into the icon once released back
