@@ -26,24 +26,29 @@ let audioNum = 0;
 
 
 // Functions
+// save the item to a variable once dragged
 function dragStart() {
    console.log(`you are dragging ${this.id}`);
    dragItem = this;
    setTimeout(visibleDrag,0);
 }
 
+// temporarily hide the dragged item in the original box
 function visibleDrag() {
     dragItem.classList.toggle("no-display");
 }
 
+// prevent default behaviors of the dragover event
 function defPrevent(e) {
     e.preventDefault();
 }
 
+// show a preview of the character on dragover
 function showPreview() {
     this.classList.add("preview");
 }
 
+// attach the icon into the drop zone and change it to the character
 function dropAudio(e) {
     e.preventDefault();
     if (this.firstElementChild) return;
@@ -55,14 +60,14 @@ function dropAudio(e) {
     startAudio(dragItem);
 }
 
-
+// revert the character into the icon once released back
 function dropBack(e) {
     e.preventDefault();
     //console.log(`${dragItem.id} was dropped back to start`);
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("char");   
     dragItem.classList.add("icon"); 
-
+// removes that audio layer for good
     audioElements.forEach((elem) => {
         if(elem.id == `${dragItem.id}-audio`) {
             elem.remove();
@@ -74,7 +79,7 @@ function dropBack(e) {
 
 
 
-
+// add a new audio layer for a character on drop zone
 function startAudio(elem) {
    let audioFile = elem.dataset.audio;
    if(!audioFile) return;
@@ -92,8 +97,10 @@ function startAudio(elem) {
    mainbox.appendChild(audioItem);
 }
 
+// this button does what the function says
 function playPauseAudio() {
     audioElements.forEach((elem) => {
+       // change icon to play if the audio is paused, and vice versa
         if(elem.paused){
             elem.play();
             playIcon.classList.toggle("st7");
@@ -106,6 +113,7 @@ function playPauseAudio() {
     })
 }
 
+// restart and set volume to all audio
 function rewindAudio() {
     audioElements.forEach((elem) => {
         elem.currentTime = 0;
