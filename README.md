@@ -10,10 +10,11 @@ Russell is responsible for development, core ideas, and technical research, focu
 Feel free to explore our music mixer and enjoy it.
 
 ## Installation 💻
-No installation required, simply download the zip file and extract.
+No installation required, simply click the link to our webpage and enjoy our project 
 
 ## Usage
-Open index.html in your choice of browser to view and enjoy our project.
+* Drag a character icon into the drop zone. The character will play their accompanied song or sound.
+* You can tap buttons to play and pause all the audios, as well as rewind them. Use the slider to adjust the volume.
 
 ## Contributing 
 1. Fork it!
@@ -23,7 +24,15 @@ Open index.html in your choice of browser to view and enjoy our project.
 5. Submit a pull request :D
 
 ## History
-TODO: Write history
+* 3/16/2026: Completed the basic functional website with character drawings
+
+## To be Done
+* Add DJ characters who can play different types of music
+* Show text bubbles and dialogues
+* Add individual audio controls for a selected character
+* Add character preview for drop zones when hovered
+* Prevent game being played for small screen widths
+* Implement a sound guessing video game
 
 ## Credits
 Russell and Jin Cheon
