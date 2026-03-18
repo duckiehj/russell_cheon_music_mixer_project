@@ -49,11 +49,13 @@ function dropAudio(e) {
     if (this.firstElementChild) return;
     console.log(`${dragItem.id} was dropped in the zone`);
     this.appendChild(dragItem);
+    dragItem.src = `images/${dragItem.id}.svg`;
     dragItem.classList.remove("icon");
     dragItem.classList.add("char");
 
     startAudio(dragItem);
 }
+
 
 function dropBack(e) {
     e.preventDefault();
