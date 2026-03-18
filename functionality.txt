@@ -31,3 +31,31 @@ MASTER VOLUME
 REWIND TO START
 MUTE/SOLO A CHARACTER
 
+
+VERSIONS:
+v1.3
+Main functionalities:
+
+f1 - Dragged icon becomes a character when dropped
+First, attach event listener to dragstart and save the dragged icon in a global variable. Attach event listeners for dragenter, dragover and drop to the zones with a forEach loop. Then use a function to remove default behaviors of the drop zones.
+
+For the drop event, add a function to append the icon. Then switch its CSS class to the one used to display the character.
+
+Optionally, toggle a hidden class to the icon on a tray while on dragstart, and toggle it back off on dragend.
+
+* f2 - Character plays the audio once dropped
+We need to add an audio element into the DOM. Because there are many sounds to be mixed, we need to store them into an array, so declare an empty one at the start. This way there's no need to scan the document again to find all the audios we created.
+
+Once a character is in the drop zone, create a new audio element and attach it inside the document body. Add it into the array using push() and load it. Give it an id associated with the character using a convention. The audio source is to be matched with the one declared in the corresponding character's dataset from its html.
+
+Set the audio state to play and change the icon inside the play/pause button to pause by applying classes to the icon.
+
+* f3 - Play/pause button affects all the audios
+Add event listeners for the click event of the buttons. Loop through the audio array we created, and then check if each audio element is paused or not (in other words, playing). Then change the audio state to the opposite.
+
+* f4 - The same goes with volume and rewind controls
+Loop through the audio array, and for the rewind button, set the currentTime of each element to 0.
+Add event listener for change to the volume slider, and then set the volume property to the one calculated from its range value.
+
+* f5 - Character no longer plays the audio once dragged back to start
+Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Remove the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() to completely remove it.
