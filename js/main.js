@@ -62,14 +62,20 @@ function dropAudio(e) {
     playIcon.classList.add("st7");
 }
 
-// revert the character into the icon once released back
+// revert the character to its icon once released back
 function dropBack(e) {
     e.preventDefault();
     //console.log(`${dragItem.id} was dropped back to start`);
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("char");   
     dragItem.classList.add("icon"); 
+   
 // removes that audio layer for good
+    if (audioElements.length == 0) {
+       pauseIcon.classList.add("st7");
+       playIcon.classList.remove("st7");
+       return;
+    }
     audioElements.forEach((elem) => {
         if(elem.id == `${dragItem.id}-audio`) {
             elem.remove();
@@ -115,7 +121,7 @@ function playPauseAudio() {
     })
 }
 
-// restart and set volume to all audio
+// restart and set volume to all audios
 function rewindAudio() {
     audioElements.forEach((elem) => {
         elem.currentTime = 0;
