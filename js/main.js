@@ -29,7 +29,7 @@ let previewItem = null;
 let selected = null;
 let audioNum = 0;
 
-
+let hasAnyMusicStarted = false;
 
 // Functions
 // save the item to a variable once dragged
@@ -88,8 +88,18 @@ function dropMusic(e) {
         console.log("You can only drop instruments here");
         return;
     }
+
+    // show the band member icons again
     appendAudio(this);
     mainDjCon.classList.remove("highlight");
+
+    if (!hasAnyMusicStarted){
+        let currentIcons = iconZone.children;
+        for(let i = 0; i < currentIcons.length; i++){
+            currentIcons[i].classList.toggle("no-display");
+        }
+        hasAnyMusicStarted = true;
+    }
 }
 
 
