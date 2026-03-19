@@ -52,7 +52,10 @@ Loop through the audio array, and for the rewind button, set the currentTime of 
 Add event listener for change to the volume slider, and then set the volume property to the one calculated from its range value.
 
 * f5 - Character no longer plays the audio once dragged back to start
-Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Remove the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() to completely remove it.
+Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Remove the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() to completely remove it.\
+
+* f7 - Show a preview of a character on drop area when we drag an element over it
+On dragenter over a drop zone, set a function to add a dynamic preview element inside it. Set the preview's CSS class to ignore mouse events to prevent unexpected behaviors on dragleave. On dragleave and drop events, set another function to remove it for good. Although, for the drop event, this has to execute before the condition checks for if there is already an item inside the drop zone.
 
 
 FUTURE FEATURES (more if having enough time)
@@ -61,10 +64,8 @@ This might be done by using svg and changing the code a bit. Instead of using ex
 
 So inside the initial tray, their <use> tags are linked to the ids of the icons. Once dropped into the zone and becomes a character, the script will change the link to that of the character.
 
-Update: has to abandon on this, it's too complicated
+Update: I had to abandon using inline svgs, somehow it's not draggable anymore.
 
-* f7 - Show a preview of a character on drop area when we drag an element over it
-We might dynamically clone the drag item of that character inside the drop area on the dragenter event. After that, remove that preview on dragleave or drop.
 
 * f8 - Show a lightbox requesting users to rotate device
 The game is not designed to play on portrait, so this will be needed. If somehow it can detect the user is using a small screen, the JS will add a covering element that tells the user to rotate their device. It also applies a visually hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
