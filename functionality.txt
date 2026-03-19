@@ -59,3 +59,22 @@ Add event listener for change to the volume slider, and then set the volume prop
 
 * f5 - Character no longer plays the audio once dragged back to start
 Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Remove the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() to completely remove it.
+
+
+FUTURE FEATURES
+* f6 - Optimize loading the characters
+This might be done by using svg and changing the code a bit. Instead of using external links to the CSS background-image or the <object> tags we should implement inline svgs, which will be placed at the end of the document, but are visually hidden. After that, we can use an <use> tag with a link to the id of the svg.
+
+So inside the initial tray, their <use> tags are linked to the ids of the icons. Once dropped into the zone and becomes a character, the script will change the link to that of the character.
+
+* f7 - Show a preview of a character on drop area when we drag an element over it
+We might dynamically add a preview image of that character inside the drop area on the dragenter event, with link to the id of the inline svg. After that, remove that preview on dragleave or drop.
+
+* f8 - Show a lightbox requesting users to rotate device
+The game is not designed to play on portrait, so this will be needed. If somehow it can detect the user is using a small screen, the JS will add a covering element that tells the user to rotate their device. It also applies a visually hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
+
+* f9 - Implement a DJ character who plays songs
+Currently, the project can mix animal sounds together. But this is far from actual music. We can add a DJ character in the center who play real music, one song at a time. At first, user needs to drag to him one instrument corresponding to the songs. After that, the instrument icons should be replaced by the animal icons to mix. But we need also a way to change the song. So when the DJ is clicked, the tray should show the instrument icons again. Add another BACK button to return to adding the other characters.
+
+* f10 - Implement individual controls
+When the user clicks on any character, two more buttons will appear. One is to mute the character sound, the other (solo) is to mute all other sounds.
