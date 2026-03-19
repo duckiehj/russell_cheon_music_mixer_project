@@ -28,7 +28,7 @@ MUTE/SOLO A CHARACTER
 
 
 VERSIONS:
-v1.3
+v2.5
 Main functionalities:
 
 f1 - Dragged icon becomes a character when dropped
@@ -71,12 +71,14 @@ This might be done by using svg and changing the code a bit. Instead of using ex
 
 So inside the initial tray, their <use> tags are linked to the ids of the icons. Once dropped into the zone and becomes a character, the script will change the link to that of the character.
 
-Update: I had to abandon using inline svgs as this direction has problems I can't resolve.
+Update: I had to abandon using inline svgs as this direction has problems I can't resolve. I don't get why the inline svg becomes undraggable.
 
 
 * f8 - Show a lightbox requesting users to rotate device
 The game is not designed to play on portrait, so this will be needed. If somehow it can detect the user is using a small screen, the JS will add a covering element that tells the user to rotate their device. It also applies a visually hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
 
+* f9 - Dynamically show or hide the types of icons
+When the page first loaded, the band member icons are all hidden until the user drops an icon to the DJ. We need a global variable to check if the user has done this. Once this happens, the instrument icons are hidden while the band member icons become displayed. If the user wants to change the instrument (and the song), they would need to click on the DJ, and the instrument icons will be visible again, along with a RETURN button. If they click on the RETURN button, or any of the band member, the icon tray reverts yet again to show the band members.
 
 * f10 - Implement individual controls
 When the user clicks on any character, two more buttons will appear. One is to mute the character sound, the other (solo) is to mute all other sounds.
