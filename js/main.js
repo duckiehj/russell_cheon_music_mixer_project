@@ -30,6 +30,7 @@ let selected = null;
 let audioNum = 0;
 
 let hasAnyMusicStarted = false;
+let currentInstrument = null;
 
 // Functions
 // save the item to a variable once dragged
@@ -94,10 +95,11 @@ function dropMusic(e) {
     mainDjCon.classList.remove("highlight");
 
     if (!hasAnyMusicStarted){
-        let currentIcons = iconZone.children;
-        for(let i = 0; i < currentIcons.length; i++){
-            currentIcons[i].classList.toggle("no-display");
-        }
+        currentInstrument = dragItem;
+        currentInstrument.addEventListener("dragstart", dragInstrument);
+        currentInstrument.addEventListener("dragend", dragInstrument);
+
+        showIconsByClass("band");
         hasAnyMusicStarted = true;
     }
 }
@@ -230,6 +232,32 @@ function stopDjAnim() {
     if(musicZone.firstElementChild) return;
     mainDj.classList.remove("dj-playing");
     mainDjCon.classList.remove("highlight");
+}
+
+// Displaying Icons Handlers
+function showIconsByClass(type) {
+    let currentIcons = iconZone.children;
+    for(let i = 0; i < currentIcons.length; i++){
+        if (currentIcons[i].classList.contains(type))
+            currentIcons[i].classList.remove("no-display");
+        else
+            currentIcons[i].classList.add("no-display");
+    }
+}
+
+// if it's still in the DJ zone, revert again
+function dragInstrument(e) {
+  if (e.type == "dragstart") {
+    showIconsByClass("instrument");
+  }
+
+  if(e.type == "dragend") {
+    if(musicZone.contains(currentInstrument))
+        showIconsByClass("band");
+    else
+        currentInstrument = null;
+        hasAnyMusicStarted = false;
+  }
 }
 
 // Event Listener
