@@ -78,13 +78,14 @@ body {
         #icon-con {
             grid-area: 1/-1;
             display: flex;
+            flex-flow: wrap;
             align-items: center;
             overflow-x: auto;
             /*background-color: aquamarine;*/
             margin-left: 7%;
             width: 87%;
             height: 60%;
-
+            scrollbar-color: #944022 #e7a26d;
         }
 
         .icon {
@@ -92,10 +93,10 @@ body {
             height: 80%;
             margin-right: 3%;
             object-fit: contain;
-            object-position: bottom;
+            object-position: center;
             background-repeat: no-repeat;
             background-size: contain;
-            background-position: bottom;
+            background-position: center;
             background-color: #0D8FED;
         }
 
@@ -251,7 +252,7 @@ body {
             width: 90%;
             height: 30%;
             border-radius: 50%;
-            opacity: 100%;
+            opacity: 80%;
             background-color: #0D8FED;
         }
         .char {
@@ -263,17 +264,65 @@ body {
             z-index: 2;
         }
 
+        .preview {
+            opacity: 50%;
+            pointer-events: none;
+        }
 
-#ship {
-    background-image: url(../images/parrot_boat.svg);
+
+/* CHARACTERS */
+
+#ship.char {
+    background-image: url(../images/parrot-boat.svg);
 }
 
-#seal {
+#seal.char {
     background-image: url(../images/seal.svg);
 }
 
-#pink-dolphin {
+#pink-dolphin.char {
     background-image: url(../images/pink-dolphin.svg);
+}
+
+#seagull.char {
+    background-image: url(../images/seagull.svg);
+    background-size: 70%;
+}
+
+#conch.char {
+    background-image: url(../images/conch-shell.svg);
+}
+
+#otter.char {
+    background-image: url(../images/otter.svg);
+}
+
+#whale.char {
+    background-image: url(../images/whale.svg);
+}
+
+
+#ship-preview {
+    background-image: url(../images/parrot-boat-preview.svg);
+}
+#seal-preview {
+    background-image: url(../images/seal-preview.svg);
+}
+#pink-dolphin-preview {
+    background-image: url(../images/pink-dolphin-preview.svg);
+}
+#seagull-preview {
+    background-image: url(../images/seagull.svg);
+    background-size: 70%;
+}
+#conch-preview {
+    background-image: url(../images/conch-shell.svg);
+}
+#otter-preview {
+    background-image: url(../images/otter.svg);
+}
+#whale-preview {
+    background-image: url(../images/whale-preview.svg);
 }
 
 
@@ -287,6 +336,22 @@ body {
 
 #pink-dolphin.icon {
     background-image: url(../images/pink-dolphin-icon.svg);
+}
+
+#seagull.icon {
+    background-image: url(../images/seagull-icon.svg);
+}
+
+#conch.icon {
+    background-image: url(../images/conch-icon.svg);
+}
+
+#otter.icon {
+    background-image: url(../images/otter-icon.svg);
+}
+
+#whale.icon {
+    background-image: url(../images/whale-icon.svg);
 }
 
 .selected {

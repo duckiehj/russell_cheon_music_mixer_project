@@ -8,9 +8,7 @@
 	.st2{fill:none;stroke:#4E6BB3;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;}
 	.st3{fill:#3B2E2A;}
 	.st4{fill:none;stroke:#3B2E2A;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;}
-	.st5{display:none;fill:none;stroke:#3B2E2A;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;}
-	.st6{fill:#D6EEF2;}
-	.st7{fill:none;stroke:#3B2E2A;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;}
+	.st5{fill:none;stroke:#3B2E2A;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;}
 </style>
 <path id="pinkDolphinUnderColor" class="st0" d="M248,51.6c0,0,13.2,1.9,19.4-28.2c0,0-10.2-19.9-33.7-18.9
 	c-23.6,0.9-41.1,12-41.1,12S142.7,1.2,111.2,28C79.8,54.8,83.1,49.2,83.1,49.2s-16.4-2.3-20.3,9.7S58,85.7,80.4,107.4
@@ -34,10 +32,7 @@
 	c-1.6-2.6-7.4-11-18-15.2C232.2,2.6,217,6.5,203.5,11c-4.4,1.6-8.2,3.3-12.1,5.5c-2.2,1.2-1.3,1-3.3,0.5c-26.4-6.2-56-6.8-79.4,11.8
 	c-8.6,7-16.8,14.5-25.8,20.6c-1.1,0.6-1.6,1.2-2.7,1.2c-0.3-0.2,0.8-0.5-2.9-0.5c-3.4,0.1-7,0.6-10.2,2.2c-4,2-6.8,5.8-8,10.1
 	c-7,20.4,11.3,41.7,29.1,55.8c11.3,10,35.2,24.1,35.9,23.9c0.4,0.4,0.3,0.5,0.3,1.4"/>
-<path id="pinkDolphinFin2" class="st5" d="M124.4,143.5c5,33.8,29.5,37.4,29.5,37.4s12.7-24.1,14.7-25.1"/>
-<path id="pinkDolphinSplash" class="st6" d="M365.4,169c0,0-30.9,8.8-67.3-8.6s-64.5,0.4-64.5,0.4s-32.9,19.1-52.4-0.2
-	s-37.4-47.5-86.8-16.6S0,156.6,0,156.6s12.8,9.3,61.2,15.9s51.3-5.7,81.5-1.3c0,0,68.4,31.9,97.9,17.2s47.4-16,76.9-9.1
-	C346.9,186.1,365.5,169,365.4,169L365.4,169z"/>
-<path id="pinkDolphinFin1" class="st7" d="M159.8,138.7c2.2,0.3,4,2.3,4.9,4.2c8.8,18.8,23.8,24.9,47.4,25.6c5,0.1,9,0.1,13.1-0.7
+<path id="pinkDolphinFin2" class="st4" d="M124.4,143.5c5,33.8,29.5,37.4,29.5,37.4s12.7-24.1,14.7-25.1"/>
+<path id="pinkDolphinFin1" class="st5" d="M159.8,138.7c2.2,0.3,4,2.3,4.9,4.2c8.8,18.8,23.8,24.9,47.4,25.6c5,0.1,9,0.1,13.1-0.7
 	c1.8-0.5,1.6,0.3,2-4.8c0.4-4.4,0.7-10.2,1.1-14.3l-0.3-19.8"/>
 </svg>
