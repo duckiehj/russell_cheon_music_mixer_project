@@ -305,6 +305,10 @@ body {
             background-color: #0D8FED;
         }
 
+        #main-dj-dz.highlight::before {
+            background-color: #eff9ff !important;
+        }
+
         .obj {
             grid-area: 1/-1;
             width: 90%;

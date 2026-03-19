@@ -10,6 +10,7 @@ const dragUnits = document.querySelectorAll(".dragunit");
 
 const musicZone = document.querySelector("#music-dz");
 const mainDj = document.querySelector("#main-dj");
+const mainDjCon = document.querySelector("#main-dj-dz");
 
 const playBtn = document.querySelector("#play-btn");
 const rewindBtn = document.querySelector("#rew-btn");
@@ -87,6 +88,7 @@ function dropMusic(e) {
         console.log("You can only drop instruments here");
         return;
     }
+    mainDjCon.classList.remove("highlight");
     appendAudio(e.target);
 }
 
@@ -121,7 +123,7 @@ function dropBack(e) {
             let i = audioElements.indexOf(elem);
             if (elem == mainMusic) {
                 mainMusic = null;
-                stopDjAnim();
+                mainDj.classList.remove("dj-playing");
             }
             elem.remove();
             if (i > -1)
@@ -169,13 +171,15 @@ function playPauseAudio() {
     audioElements.forEach((elem) => {
        // change icon to play if the audio is paused, and vice versa
         if(elem.paused){
-            elem.play(); playDjAnim();
+            elem.play(); 
             playIcon.classList.add("st7");
             pauseIcon.classList.remove("st7");
+            mainDj.classList.add("dj-playing");
         } else {
-            elem.pause(); stopDjAnim();
+            elem.pause();
             playIcon.classList.remove("st7");
             pauseIcon.classList.add("st7");
+            mainDj.classList.remove("dj-playing");
         }
     })
 }
@@ -205,11 +209,17 @@ function clickBrighten() {
 
 // Animations for the DJ
 function playDjAnim() {
+    if(dragItem.classList.contains("band")) return;
+    if(musicZone.firstElementChild) return;
     mainDj.classList.add("dj-playing");
+    mainDjCon.classList.add("highlight");
 }
 
 function stopDjAnim() {
+    if(dragItem.classList.contains("band")) return;
+    if(musicZone.firstElementChild) return;
     mainDj.classList.remove("dj-playing");
+    mainDjCon.classList.remove("highlight");
 }
 
 // Event Listener
