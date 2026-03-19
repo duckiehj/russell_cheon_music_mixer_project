@@ -60,6 +60,7 @@ function dropAudio(e) {
     startAudio(dragItem);
     pauseIcon.classList.remove("st7");
     playIcon.classList.add("st7");
+    
 }
 
 // revert the character to its icon once released back
@@ -69,20 +70,23 @@ function dropBack(e) {
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("char");   
     dragItem.classList.add("icon"); 
+
+    
    
 // removes that audio layer for good
+    audioElements.forEach((elem) => {
+        if(elem.id == `${dragItem.id}-audio`) {
+            let i = audioElements.indexOf(elem);
+            elem.remove();
+            if (i > -1)
+                audioElements.splice(i,1);
+        }
+    })
+
     if (audioElements.length == 0) {
        pauseIcon.classList.add("st7");
        playIcon.classList.remove("st7");
-       return;
     }
-    audioElements.forEach((elem) => {
-        if(elem.id == `${dragItem.id}-audio`) {
-            elem.remove();
-            let i = audioElements.indexOf(elem);
-            audioElements.splice(i,1);
-        }
-    })
 }
 
 
@@ -111,12 +115,12 @@ function playPauseAudio() {
        // change icon to play if the audio is paused, and vice versa
         if(elem.paused){
             elem.play();
-            playIcon.classList.toggle("st7");
-            pauseIcon.classList.toggle("st7");
+            playIcon.classList.add("st7");
+            pauseIcon.classList.remove("st7");
         } else {
             elem.pause();
-            playIcon.classList.toggle("st7");
-            pauseIcon.classList.toggle("st7");
+            playIcon.classList.remove("st7");
+            pauseIcon.classList.add("st7");
         }
     })
 }
