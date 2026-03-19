@@ -15,10 +15,6 @@ First, users need to select an instrument for the DJ who plays the main song.
 After that, they will drag in 4 other band members who will sing the accompanied noises
 In total there are 5 slots (1 for main DJ, 4 for others)
 
-List of Characters:
-
-Minigame:
-Click the ? button on the sidebar to activate a mini game involving a boss character asking questions
 
 Game Controls:
 RESTART GAME
