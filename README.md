@@ -32,7 +32,6 @@ No installation required, simply click the link to our webpage and enjoy our pro
 * Add individual audio controls for a selected character
 * Add character preview for drop zones when hovered
 * Prevent game being played for small screen widths
-* Implement a sound guessing video game
 
 ## Credits
 Russell and Jin Cheon
