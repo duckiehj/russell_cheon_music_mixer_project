@@ -57,7 +57,7 @@ Add event listener for change to the volume slider, and then set the volume prop
 Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Remove the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() to completely remove it.
 
 
-FUTURE FEATURES
+FUTURE FEATURES (more if having enough time)
 * f6 - Optimize loading the characters
 This might be done by using svg and changing the code a bit. Instead of using external links to the CSS background-image or the <object> tags we should implement inline svgs, which will be placed at the end of the document, but are visually hidden. After that, we can use an <use> tag with a link to the id of the svg.
 
