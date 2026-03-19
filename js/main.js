@@ -101,10 +101,10 @@ function dropMusic(e) {
 
     if (!hasAnyMusicStarted){
         currentInstrument = dragItem;
+        showIconsByClass("band");
         currentInstrument.addEventListener("dragstart", dragInstrument);
         currentInstrument.addEventListener("dragend", dragInstrument);
 
-        showIconsByClass("band");
         hasAnyMusicStarted = true;
     }
 }
