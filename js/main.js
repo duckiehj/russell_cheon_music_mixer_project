@@ -6,7 +6,9 @@ const dropZones = document.querySelectorAll(".drop-zone");
 const iconZone = document.querySelector("#icon-con");
 const mainbox = document.querySelector("body");
 
-const chars = document.querySelectorAll(".band");
+const dragUnits = document.querySelectorAll(".dragunit");
+
+const musicZone = document.querySelector("#music-dz");
 
 const playBtn = document.querySelector("#play-btn");
 const rewindBtn = document.querySelector("#rew-btn");
@@ -18,6 +20,8 @@ const volSlider = document.querySelector("#vol-slider");
 const volumeInd = document.querySelector("#volume-ind-bg");
 
 const audioElements = [];
+
+let mainMusic = null;
 
 let dragItem = null;
 let previewItem = null;
@@ -46,10 +50,11 @@ function defPrevent(e) {
 
 // show a preview of the character on dragover
 function showPreview() {
+    if(dragItem.classList.contains("instrument")) return;
     if(this.firstElementChild) return;
     previewItem = document.createElement("span");
     previewItem.id = `${dragItem.id}-preview`;
-    previewItem.classList.add("char");
+    previewItem.classList.add("obj");
     previewItem.classList.add("preview");
     this.appendChild(previewItem);
 }
@@ -65,29 +70,47 @@ function hidePreview(e) {
 }
 
 // attach the icon into the drop zone and change it to the character
-function dropAudio(e) {
+function dropBand(e) {
     e.preventDefault();
-    if(!dragItem.classList.contains("band")) return;
+    if(dragItem.classList.contains("instrument")){
+        console.log("You can only drop band members here");
+        return;
+    }
+
     hidePreview(e);
-    if (this.firstElementChild) return;
+    appendAudio(e.target);
+}
+
+function dropMusic(e) {
+    e.preventDefault();
+    if(dragItem.classList.contains("band")){
+        console.log("You can only drop instruments here");
+        return;
+    }
+    appendAudio(e.target);
+}
+
+
+function appendAudio(elem){
+    if (elem.firstElementChild) return;
     console.log(`${dragItem.id} was dropped in the zone`);
-    this.appendChild(dragItem);
+    elem.appendChild(dragItem);
     
     dragItem.classList.remove("icon");
-    dragItem.classList.add("char");
+    dragItem.classList.add("obj");
 
     startAudio(dragItem);
     pauseIcon.classList.remove("st7");
     playIcon.classList.add("st7");
-    
 }
+
 
 // revert the character to its icon once released back
 function dropBack(e) {
     e.preventDefault();
     //console.log(`${dragItem.id} was dropped back to start`);
     iconZone.appendChild(dragItem);
-    dragItem.classList.remove("char");   
+    dragItem.classList.remove("obj");   
     dragItem.classList.add("icon"); 
 
     
@@ -96,6 +119,9 @@ function dropBack(e) {
     audioElements.forEach((elem) => {
         if(elem.id == `${dragItem.id}-audio`) {
             let i = audioElements.indexOf(elem);
+            if (elem == mainMusic) {
+                mainMusic = null;
+            }
             elem.remove();
             if (i > -1)
                 audioElements.splice(i,1);
@@ -114,18 +140,27 @@ function dropBack(e) {
 function startAudio(elem) {
    let audioFile = elem.dataset.audio;
    if(!audioFile) return;
-   let audioItem = document.createElement("audio");
 
-   audioElements.push(audioItem);
+   let audioItem = null;
+   
+    audioItem = document.createElement("audio");
+    audioElements.push(audioItem);
+    audioItem.id = `${elem.id}-audio`;
+
+    if(elem.classList.contains("instrument")){
+        mainMusic = audioItem;
+    }
+
+    mainbox.appendChild(audioItem);
+
+
    audioItem.style.display = "none";
    audioItem.loop = true;
    audioItem.src = `audio/${audioFile}`;
-   audioItem.id = `${elem.id}-audio`;
    audioItem.load();
    audioItem.volume = volSlider.value/100;
    audioItem.play();
-   
-   mainbox.appendChild(audioItem);
+   audioItem = null;
 }
 
 // this button does what the function says
@@ -169,7 +204,7 @@ function clickBrighten() {
 
 // Event Listener
 
-chars.forEach((elem) => {
+dragUnits.forEach((elem) => {
     elem.addEventListener("dragstart", dragStart);
     elem.addEventListener("dragend", visibleDrag);    
 });
@@ -178,8 +213,11 @@ dropZones.forEach((elem) => {
     elem.addEventListener("dragover", defPrevent); 
     elem.addEventListener("dragenter", showPreview);
     elem.addEventListener("dragleave", hidePreview);
-    elem.addEventListener("drop", dropAudio);
+    elem.addEventListener("drop", dropBand);
 })
+
+musicZone.addEventListener("dragover", defPrevent); 
+musicZone.addEventListener("drop", dropMusic);
 
 board.addEventListener("dragover", defPrevent);
 board.addEventListener("drop", dropBack);
