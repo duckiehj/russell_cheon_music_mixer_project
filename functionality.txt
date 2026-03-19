@@ -1,11 +1,9 @@
-functionality - music mixer
+FUNCTIONALITY - Music Mixer
 
 Basic Functionality:
 
 drag an animal icon from a map to the band zones
-
 once dragged, the icon becomes or is replaced by a band member
-
 audio plays once dragged
 
 
@@ -15,10 +13,6 @@ First, users need to select an instrument for the DJ who plays the main song.
 After that, they will drag in 4 other band members who will sing the accompanied noises
 In total there are 5 slots (1 for main DJ, 4 for others)
 
-List of Characters:
-
-Minigame:
-Click the ? button on the sidebar to activate a mini game involving a boss character asking questions
 
 Game Controls:
 RESTART GAME
@@ -31,3 +25,58 @@ MASTER VOLUME
 REWIND TO START
 MUTE/SOLO A CHARACTER
 
+
+VERSIONS:
+v1.3
+Main functionalities:
+
+f1 - Dragged icon becomes a character when dropped
+First, attach event listener to dragstart and save the dragged icon in a global variable. Attach event listeners for dragenter, dragover and drop to the zones with a forEach loop. Then use a function to remove default behaviors of the drop zones.
+
+For the drop event, add a function to append the icon. Then switch its CSS class to the one used to display the character.
+
+Optionally, toggle a hidden class to the icon on a tray while on dragstart, and toggle it back off on dragend.
+
+* f2 - Character plays the audio once dropped
+We need to add an audio element into the DOM. Because there are many sounds to be mixed, we need to store them into an array, so declare an empty one at the start. This way there's no need to scan the document again to find all the audios we created.
+
+Once a character is in the drop zone, create a new audio element and attach it inside the document body. Add it into the array using push() and load it. Give it an id associated with the character using a convention. The audio source is to be matched with the one declared in the corresponding character's dataset from its html.
+
+Set the audio state to play and change the icon inside the play/pause button to pause by applying classes to the icon.
+
+* f3 - Play/pause button affects all the audios
+Add event listeners for the click event of the buttons. Loop through the audio array we created, and then check if each audio element is paused or not (in other words, playing). Then change the audio state to the opposite.
+
+* f4 - The same goes with volume and rewind controls
+Loop through the audio array, and for the rewind button, set the currentTime of each element to 0.
+Add event listener for change to the volume slider, and then set the volume property to the one calculated from its range value.
+
+* f5 - Character no longer plays the audio once dragged back to start
+Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Remove the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() to completely remove it.\
+
+* f7 - Show a preview of a character on drop area when we drag an element over it
+On dragenter over a drop zone, set a function to add a dynamic preview element inside it. Set the preview's CSS class to ignore mouse events to prevent unexpected behaviors on dragleave. On dragleave and drop events, set another function to remove it for good. Although, for the drop event, this has to execute before the condition checks for if there is already an item inside the drop zone.
+
+* f9 - Implement a DJ character who plays songs
+Currently, the project can mix animal sounds together. But this is far from actual music. We can add a DJ character in the center who play real music, one song at a time. At first, user needs to drag to him one instrument corresponding to the songs. 
+
+However, his drop zone has to only accept the instruments and not other members. We can do this by checking the class of the drag item.
+
+After that, the instrument icons should be replaced by the animal icons to mix. But we need also a way to change the song. So when the DJ is clicked, the tray should show the instrument icons again. Add another BACK button to return to adding the other characters.
+
+
+FUTURE FEATURES (more if having enough time)
+* f6 - Optimize loading the characters
+This might be done by using svg and changing the code a bit. Instead of using external links to the CSS background-image or the <object> tags we should implement inline svgs, which will be placed at the end of the document, but are visually hidden. After that, we can use an <use> tag with a link to the id of the svg.
+
+So inside the initial tray, their <use> tags are linked to the ids of the icons. Once dropped into the zone and becomes a character, the script will change the link to that of the character.
+
+Update: I had to abandon using inline svgs, somehow it's not draggable anymore.
+
+
+* f8 - Show a lightbox requesting users to rotate device
+The game is not designed to play on portrait, so this will be needed. If somehow it can detect the user is using a small screen, the JS will add a covering element that tells the user to rotate their device. It also applies a visually hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
+
+
+* f10 - Implement individual controls
+When the user clicks on any character, two more buttons will appear. One is to mute the character sound, the other (solo) is to mute all other sounds.
