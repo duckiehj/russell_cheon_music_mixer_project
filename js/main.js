@@ -169,4 +169,3 @@ rewindBtn.addEventListener("click", rewindAudio);
 volSlider.addEventListener("change", setVolume);
 
 window.addEventListener("load", changeVolumeBar);
-

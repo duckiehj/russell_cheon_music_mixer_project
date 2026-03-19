@@ -272,20 +272,20 @@ body {
     background-image: url(../images/seal.svg);
 }
 
-#pink-whale {
+#pink-dolphin {
     background-image: url(../images/pink-dolphin.svg);
 }
 
 
 #ship.icon {
-    background-image: url(../images/ship_icon.svg);
+    background-image: url(../images/ship-icon.svg);
 }
 
 #seal.icon {
     background-image: url(../images/seal-icon.svg);
 }
 
-#pink-whale.icon {
+#pink-dolphin.icon {
     background-image: url(../images/pink-dolphin-icon.svg);
 }
 
@@ -297,4 +297,3 @@ body {
     30%{transform: translateY(2%);}
     70%{transform: translateY(-2%);}
 }
-
