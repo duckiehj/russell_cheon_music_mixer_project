@@ -20,6 +20,7 @@ const volumeInd = document.querySelector("#volume-ind-bg");
 const audioElements = [];
 
 let dragItem = null;
+let previewItem = null;
 let selected = null;
 let audioNum = 0;
 
@@ -45,15 +46,32 @@ function defPrevent(e) {
 
 // show a preview of the character on dragover
 function showPreview() {
-    this.classList.add("preview");
+    if(this.firstElementChild) return;
+    previewItem = document.createElement("span");
+    previewItem.id = `${dragItem.id}-preview`;
+    previewItem.classList.add("char");
+    previewItem.classList.add("preview");
+    this.appendChild(previewItem);
+}
+
+function hidePreview(e) {
+    e.preventDefault();
+    if(previewItem){
+        previewItem.remove();
+        console.log(`removed ${previewItem.id}`);      
+        previewItem = null;  
+    }
+
 }
 
 // attach the icon into the drop zone and change it to the character
 function dropAudio(e) {
     e.preventDefault();
+    hidePreview(e);
     if (this.firstElementChild) return;
     console.log(`${dragItem.id} was dropped in the zone`);
     this.appendChild(dragItem);
+    
     dragItem.classList.remove("icon");
     dragItem.classList.add("char");
 
@@ -158,6 +176,7 @@ chars.forEach((elem) => {
 dropZones.forEach((elem) => {
     elem.addEventListener("dragover", defPrevent); 
     elem.addEventListener("dragenter", showPreview);
+    elem.addEventListener("dragleave", hidePreview);
     elem.addEventListener("drop", dropAudio);
 })
 
