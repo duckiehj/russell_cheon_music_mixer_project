@@ -251,6 +251,20 @@ body {
         z-index: 2;
     }
 
+    #music-dz {
+        display: block;
+        background-color: purple;
+        opacity: 50%;
+        justify-self: end;
+        margin-right: 10%;
+        width: 40%;
+        height: 50%;
+        grid-area: 1/-1;
+        z-index: 3;
+    }
+
+
+
         .spot::before{
             display: inline;
             content: "";

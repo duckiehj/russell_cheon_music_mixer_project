@@ -67,6 +67,7 @@ function hidePreview(e) {
 // attach the icon into the drop zone and change it to the character
 function dropAudio(e) {
     e.preventDefault();
+    if(!dragItem.classList.contains("band")) return;
     hidePreview(e);
     if (this.firstElementChild) return;
     console.log(`${dragItem.id} was dropped in the zone`);
