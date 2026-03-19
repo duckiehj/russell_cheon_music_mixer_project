@@ -1,11 +1,9 @@
-functionality - music mixer
+FUNCTIONALITY - Music Mixer
 
 Basic Functionality:
 
 drag an animal icon from a map to the band zones
-
 once dragged, the icon becomes or is replaced by a band member
-
 audio plays once dragged
 
 
