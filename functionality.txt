@@ -70,7 +70,7 @@ This might be done by using svg and changing the code a bit. Instead of using ex
 
 So inside the initial tray, their <use> tags are linked to the ids of the icons. Once dropped into the zone and becomes a character, the script will change the link to that of the character.
 
-Update: I had to abandon using inline svgs, somehow it's not draggable anymore.
+Update: I had to abandon using inline svgs as this direction has problems I can't resolve.
 
 
 * f8 - Show a lightbox requesting users to rotate device
