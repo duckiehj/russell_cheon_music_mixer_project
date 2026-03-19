@@ -57,6 +57,13 @@ Add the drop event listener to the original zone. When the character is dropped 
 * f7 - Show a preview of a character on drop area when we drag an element over it
 On dragenter over a drop zone, set a function to add a dynamic preview element inside it. Set the preview's CSS class to ignore mouse events to prevent unexpected behaviors on dragleave. On dragleave and drop events, set another function to remove it for good. Although, for the drop event, this has to execute before the condition checks for if there is already an item inside the drop zone.
 
+* f9 - Implement a DJ character who plays songs
+Currently, the project can mix animal sounds together. But this is far from actual music. We can add a DJ character in the center who play real music, one song at a time. At first, user needs to drag to him one instrument corresponding to the songs. 
+
+However, his drop zone has to only accept the instruments and not other members. We can do this by checking the class of the drag item.
+
+After that, the instrument icons should be replaced by the animal icons to mix. But we need also a way to change the song. So when the DJ is clicked, the tray should show the instrument icons again. Add another BACK button to return to adding the other characters.
+
 
 FUTURE FEATURES (more if having enough time)
 * f6 - Optimize loading the characters
@@ -70,8 +77,6 @@ Update: I had to abandon using inline svgs, somehow it's not draggable anymore.
 * f8 - Show a lightbox requesting users to rotate device
 The game is not designed to play on portrait, so this will be needed. If somehow it can detect the user is using a small screen, the JS will add a covering element that tells the user to rotate their device. It also applies a visually hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
 
-* f9 - Implement a DJ character who plays songs
-Currently, the project can mix animal sounds together. But this is far from actual music. We can add a DJ character in the center who play real music, one song at a time. At first, user needs to drag to him one instrument corresponding to the songs. After that, the instrument icons should be replaced by the animal icons to mix. But we need also a way to change the song. So when the DJ is clicked, the tray should show the instrument icons again. Add another BACK button to return to adding the other characters.
 
 * f10 - Implement individual controls
 When the user clicks on any character, two more buttons will appear. One is to mute the character sound, the other (solo) is to mute all other sounds.
