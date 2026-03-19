@@ -61,8 +61,10 @@ This might be done by using svg and changing the code a bit. Instead of using ex
 
 So inside the initial tray, their <use> tags are linked to the ids of the icons. Once dropped into the zone and becomes a character, the script will change the link to that of the character.
 
+Update: has to abandon on this, it's too complicated
+
 * f7 - Show a preview of a character on drop area when we drag an element over it
-We might dynamically add a preview image of that character inside the drop area on the dragenter event, with link to the id of the inline svg. After that, remove that preview on dragleave or drop.
+We might dynamically clone the drag item of that character inside the drop area on the dragenter event. After that, remove that preview on dragleave or drop.
 
 * f8 - Show a lightbox requesting users to rotate device
 The game is not designed to play on portrait, so this will be needed. If somehow it can detect the user is using a small screen, the JS will add a covering element that tells the user to rotate their device. It also applies a visually hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
