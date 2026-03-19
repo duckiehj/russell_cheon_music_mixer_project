@@ -169,13 +169,11 @@ function playPauseAudio() {
     audioElements.forEach((elem) => {
        // change icon to play if the audio is paused, and vice versa
         if(elem.paused){
-            elem.play();
-            playDjAnim();
+            elem.play(); playDjAnim();
             playIcon.classList.add("st7");
             pauseIcon.classList.remove("st7");
         } else {
-            elem.pause();
-            stopDjAnim();
+            elem.pause(); stopDjAnim();
             playIcon.classList.remove("st7");
             pauseIcon.classList.add("st7");
         }

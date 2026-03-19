@@ -265,7 +265,6 @@ body {
         80% {transform: translateY(2%);}
         100% {transform: translateY(0);}
     }
-
     
 
     #music-dz {
@@ -279,6 +278,20 @@ body {
         z-index: 3;
     }
 
+    #music-dz .instrument {
+        animation: instrument ease-in-out 2s infinite;
+    }
+
+    @keyframes instrument {
+        0% {transform: rotate(0);}
+        20% {transform: rotate(5deg);}
+        40% {transform: rotate(0);}
+        60% {transform: rotate(0%);}
+        80% {transform: rotate(-5deg);}
+        100% {transform: rotate(0);}
+    }
+
+
 
 
         .spot::before{
@@ -291,6 +304,7 @@ body {
             opacity: 80%;
             background-color: #0D8FED;
         }
+
         .obj {
             grid-area: 1/-1;
             width: 90%;
