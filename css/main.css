@@ -252,7 +252,7 @@ body {
     }
 
     #music-dz {
-        display: block;
+        display: grid;
         background-color: purple;
         opacity: 50%;
         justify-self: end;
