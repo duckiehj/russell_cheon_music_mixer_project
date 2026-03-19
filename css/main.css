@@ -92,12 +92,13 @@ body {
             max-width: 17%;
             height: 80%;
             margin-right: 3%;
+            cursor: grab;
             object-fit: contain;
             object-position: center;
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
-            background-color: #0D8FED;
+            /*background-color: #0D8FED;*/
         }
 
         span.icon {
@@ -233,7 +234,7 @@ body {
     height: 63%;
 }
 
-    .drop-zone {
+    .spot {
         display: grid;
         height: 40%;
         width: 27%;
@@ -241,11 +242,59 @@ body {
         align-items: end;
     }
 
-    .drop-zone#main-dj-dz {
+    #main-dj-dz {
         height: 50%;
     }
 
-        .drop-zone::before{
+    #main-dj {
+        width: 50%;
+        grid-area: 1/-1;
+        z-index: 2;
+        cursor: pointer;
+        animation: djanimation ease-in-out 3s infinite;
+    }
+
+    #main-dj.dj-playing {
+        animation: djanimation ease-in-out 1s infinite;
+    }
+    @keyframes djanimation {
+        0% {transform: translateY(0);}
+        20% {transform: translateY(2%);}
+        40% {transform: translateY(0);}
+        60% {transform: translateY(0%);}
+        80% {transform: translateY(2%);}
+        100% {transform: translateY(0);}
+    }
+    
+
+    #music-dz {
+        display: grid;
+        /*background-color: purple;*/
+        justify-self: end;
+        margin-right: 10%;
+        width: 40%;
+        height: 40%;
+        grid-area: 1/-1;
+        z-index: 3;
+    }
+
+    #music-dz .instrument {
+        animation: instrument ease-in-out 2s infinite;
+    }
+
+    @keyframes instrument {
+        0% {transform: rotate(0);}
+        20% {transform: rotate(5deg);}
+        40% {transform: rotate(0);}
+        60% {transform: rotate(0%);}
+        80% {transform: rotate(-5deg);}
+        100% {transform: rotate(0);}
+    }
+
+
+
+
+        .spot::before{
             display: inline;
             content: "";
             grid-area: 1/-1;
@@ -255,13 +304,23 @@ body {
             opacity: 80%;
             background-color: #0D8FED;
         }
-        .char {
+
+        #main-dj-dz.highlight::before {
+            background-color: #eff9ff !important;
+        }
+
+        .obj {
             grid-area: 1/-1;
             width: 90%;
             height: 100%;
             background-repeat: no-repeat;
             background-position: 50% 80%;
             z-index: 2;
+            cursor: pointer;
+        }
+
+        #music-dz .obj {
+            width: 100%;
         }
 
         .preview {
@@ -270,36 +329,58 @@ body {
         }
 
 
+#sidebar p {
+    font-size: 25px;
+}
+
 /* CHARACTERS */
 
-#ship.char {
+#ship.obj {
     background-image: url(../images/parrot-boat.svg);
 }
 
-#seal.char {
+#seal.obj {
     background-image: url(../images/seal.svg);
 }
 
-#pink-dolphin.char {
+#pink-dolphin.obj {
     background-image: url(../images/pink-dolphin.svg);
 }
 
-#seagull.char {
+#seagull.obj {
     background-image: url(../images/seagull.svg);
     background-size: 70%;
 }
 
-#conch.char {
+#conch.obj {
     background-image: url(../images/conch-shell.svg);
 }
 
-#otter.char {
+#otter.obj {
     background-image: url(../images/otter.svg);
 }
 
-#whale.char {
+#whale.obj {
     background-image: url(../images/whale.svg);
 }
+
+#piccolo {
+    background-image: url(../images/piccolo.svg);
+}
+
+#saxophone {
+    background-image: url(../images/saxophone.svg);
+}
+
+#violin {
+    background-image: url(../images/violin.svg);
+}
+
+#accordion {
+    background-image: url(../images/accordion.svg);
+}
+
+
 
 
 #ship-preview {
@@ -323,6 +404,18 @@ body {
 }
 #whale-preview {
     background-image: url(../images/whale-preview.svg);
+}
+#piccolo-preview {
+    background-image: url(../images/piccolo.svg);
+}
+#saxophone-preview {
+    background-image: url(../images/saxophone.svg);
+}
+#violin-preview {
+    background-image: url(../images/violin.svg);
+}
+#accordion-preview {
+    background-image: url(../images/accordion.svg);
 }
 
 
