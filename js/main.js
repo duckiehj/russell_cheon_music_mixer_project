@@ -14,6 +14,7 @@ const mainDjCon = document.querySelector("#main-dj-dz");
 
 const playBtn = document.querySelector("#play-btn");
 const rewindBtn = document.querySelector("#rew-btn");
+const returnBtn = document.querySelector("#return-btn");
 
 const playIcon = document.querySelector("#play-icon");
 const pauseIcon = document.querySelector("#pause-icon");
@@ -31,6 +32,8 @@ let audioNum = 0;
 
 let hasAnyMusicStarted = false;
 let currentInstrument = null;
+let gameState = 0;
+let boardState = "instrument";
 
 // Functions
 // save the item to a variable once dragged
@@ -94,6 +97,8 @@ function dropMusic(e) {
     appendAudio(this);
     mainDjCon.classList.remove("highlight");
 
+    if(gameState == 0) gameState++;
+
     if (!hasAnyMusicStarted){
         currentInstrument = dragItem;
         currentInstrument.addEventListener("dragstart", dragInstrument);
@@ -122,12 +127,14 @@ function appendAudio(elem){
 // revert the character to its icon once released back
 function dropBack(e) {
     e.preventDefault();
+
+    //prevents instrument and band icons together on the board
+    if (!dragItem.classList.contains(boardState)) return;
+
     //console.log(`${dragItem.id} was dropped back to start`);
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("obj");   
-    dragItem.classList.add("icon"); 
-
-    
+    dragItem.classList.add("icon");     
    
 // removes that audio layer for good
     audioElements.forEach((elem) => {
@@ -237,11 +244,14 @@ function stopDjAnim() {
 // Displaying Icons Handlers
 function showIconsByClass(type) {
     let currentIcons = iconZone.children;
+    boardState = type;
     for(let i = 0; i < currentIcons.length; i++){
-        if (currentIcons[i].classList.contains(type))
+        if (currentIcons[i].classList.contains(type)) {
             currentIcons[i].classList.remove("no-display");
-        else
+        }
+        else {
             currentIcons[i].classList.add("no-display");
+        } 
     }
 }
 
@@ -258,6 +268,14 @@ function dragInstrument(e) {
         currentInstrument = null;
         hasAnyMusicStarted = false;
   }
+}
+
+// show or hide specific audio controls
+function showSpecificControls(e) {
+    if((this == musicZone) && (gameState > 0))
+        showIconsByClass("instrument");
+    else if (this == returnBtn)
+        showIconsByClass("band");
 }
 
 // Event Listener
@@ -285,5 +303,9 @@ board.addEventListener("drop", dropBack);
 playBtn.addEventListener("click", playPauseAudio);
 rewindBtn.addEventListener("click", rewindAudio);
 volSlider.addEventListener("change", setVolume);
+
+
+musicZone.addEventListener("click", showSpecificControls);
+returnBtn.addEventListener("click", showSpecificControls);
 
 window.addEventListener("load", changeVolumeBar);

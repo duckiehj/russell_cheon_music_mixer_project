@@ -105,6 +105,20 @@ body {
             width: 17%;
         }
 
+    #return-btn {
+        width: 10%;
+        border: none;
+        justify-self: end;
+        background-color: transparent;
+        border-radius: 10px;
+        cursor: pointer;
+        order: 1;
+    }
+
+    #return-btn:hover {
+        background-color: #B87638;
+    }
+
     
     .audio-ctrl {
         margin-top: 5%;
@@ -276,6 +290,11 @@ body {
         height: 40%;
         grid-area: 1/-1;
         z-index: 3;
+        cursor: pointer;
+    }
+
+    #main-dj-dz:has(#music-dz:hover)::before {
+        filter: brightness(50%);
     }
 
     #main-dj-dz:has(.dj-playing) .instrument {
