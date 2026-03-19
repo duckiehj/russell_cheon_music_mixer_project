@@ -92,6 +92,7 @@ body {
             max-width: 17%;
             height: 80%;
             margin-right: 3%;
+            cursor: grab;
             object-fit: contain;
             object-position: center;
             background-repeat: no-repeat;
@@ -249,7 +250,23 @@ body {
         width: 50%;
         grid-area: 1/-1;
         z-index: 2;
+        cursor: pointer;
+        animation: djanimation ease-in-out 3s infinite;
     }
+
+    #main-dj.dj-playing {
+        animation: djanimation ease-in-out 1s infinite;
+    }
+    @keyframes djanimation {
+        0% {transform: translateY(0);}
+        20% {transform: translateY(2%);}
+        40% {transform: translateY(0);}
+        60% {transform: translateY(0%);}
+        80% {transform: translateY(2%);}
+        100% {transform: translateY(0);}
+    }
+
+    
 
     #music-dz {
         display: grid;
@@ -281,6 +298,7 @@ body {
             background-repeat: no-repeat;
             background-position: 50% 80%;
             z-index: 2;
+            cursor: pointer;
         }
 
         #music-dz .obj {

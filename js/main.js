@@ -9,6 +9,7 @@ const mainbox = document.querySelector("body");
 const dragUnits = document.querySelectorAll(".dragunit");
 
 const musicZone = document.querySelector("#music-dz");
+const mainDj = document.querySelector("#main-dj");
 
 const playBtn = document.querySelector("#play-btn");
 const rewindBtn = document.querySelector("#rew-btn");
@@ -16,7 +17,6 @@ const rewindBtn = document.querySelector("#rew-btn");
 const playIcon = document.querySelector("#play-icon");
 const pauseIcon = document.querySelector("#pause-icon");
 const volSlider = document.querySelector("#vol-slider");
-
 const volumeInd = document.querySelector("#volume-ind-bg");
 
 const audioElements = [];
@@ -121,6 +121,7 @@ function dropBack(e) {
             let i = audioElements.indexOf(elem);
             if (elem == mainMusic) {
                 mainMusic = null;
+                stopDjAnim();
             }
             elem.remove();
             if (i > -1)
@@ -169,10 +170,12 @@ function playPauseAudio() {
        // change icon to play if the audio is paused, and vice versa
         if(elem.paused){
             elem.play();
+            playDjAnim();
             playIcon.classList.add("st7");
             pauseIcon.classList.remove("st7");
         } else {
             elem.pause();
+            stopDjAnim();
             playIcon.classList.remove("st7");
             pauseIcon.classList.add("st7");
         }
@@ -202,6 +205,15 @@ function clickBrighten() {
     rewindBtn.classList.toggle("clicked");
 }
 
+// Animations for the DJ
+function playDjAnim() {
+    mainDj.classList.add("dj-playing");
+}
+
+function stopDjAnim() {
+    mainDj.classList.remove("dj-playing");
+}
+
 // Event Listener
 
 dragUnits.forEach((elem) => {
@@ -217,6 +229,8 @@ dropZones.forEach((elem) => {
 })
 
 musicZone.addEventListener("dragover", defPrevent); 
+musicZone.addEventListener("dragenter", playDjAnim); 
+musicZone.addEventListener("dragleave", stopDjAnim); 
 musicZone.addEventListener("drop", dropMusic);
 
 board.addEventListener("dragover", defPrevent);
