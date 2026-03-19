@@ -307,6 +307,24 @@ body {
     background-image: url(../images/whale.svg);
 }
 
+#piccolo {
+    background-image: url(../images/piccolo.svg);
+}
+
+#saxophone {
+    background-image: url(../images/saxophone.svg);
+}
+
+#violin {
+    background-image: url(../images/violin.svg);
+}
+
+#accordion {
+    background-image: url(../images/accordion.svg);
+}
+
+
+
 
 #ship-preview {
     background-image: url(../images/parrot-boat-preview.svg);
@@ -329,6 +347,18 @@ body {
 }
 #whale-preview {
     background-image: url(../images/whale-preview.svg);
+}
+#piccolo-preview {
+    background-image: url(../images/piccolo.svg);
+}
+#saxophone-preview {
+    background-image: url(../images/saxophone.svg);
+}
+#violin-preview {
+    background-image: url(../images/violin.svg);
+}
+#accordion-preview {
+    background-image: url(../images/accordion.svg);
 }
 
 
