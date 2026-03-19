@@ -79,7 +79,7 @@ function dropBand(e) {
     }
 
     hidePreview(e);
-    appendAudio(e.target);
+    appendAudio(this);
 }
 
 function dropMusic(e) {
@@ -88,8 +88,8 @@ function dropMusic(e) {
         console.log("You can only drop instruments here");
         return;
     }
+    appendAudio(this);
     mainDjCon.classList.remove("highlight");
-    appendAudio(e.target);
 }
 
 
