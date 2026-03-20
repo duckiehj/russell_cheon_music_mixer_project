@@ -28,19 +28,24 @@ const buttonCon = document.querySelector("#btn-con");
 const volSlider = document.querySelector("#vol-slider");
 const volumeInd = document.querySelector("#volume-ind-bg");
 
-const currentUnits = document.querySelectorAll(".spot")
+const ambience = document.querySelector("#main-ambience");
+const sfx = document.querySelector("#special-sfx");
 
+const currentUnits = [];
 const audioElements = [];
-
-let mainMusic = null;
 
 let dragItem = null;
 let previewItem = null;
+
+let mainMusic = null;
+let currentInstrument = null;
+
 let selected = null;
-let audioNum = 0;
+let selectedAudio = null;
 
 let hasAnyMusicStarted = false;
-let currentInstrument = null;
+let isAnyAudioSolo = false;
+
 let gameState = 0;
 let boardState = "instrument";
 
@@ -128,6 +133,9 @@ function appendAudio(elem){
     dragItem.classList.remove("icon");
     dragItem.classList.add("obj");
 
+    playAmbience();
+    playSfx("water_drop.wav");
+
     startAudio(dragItem);
     pauseIcon.classList.remove("st7");
     playIcon.classList.add("st7");
@@ -174,6 +182,7 @@ function dropBack(e) {
 function startAudio(elem) {
    let audioFile = elem.dataset.audio;
    if(!audioFile) return;
+   currentUnits.push(elem);
 
    let audioItem = null;
    
@@ -188,13 +197,17 @@ function startAudio(elem) {
     mainbox.appendChild(audioItem);
 
 
-   audioItem.style.display = "none";
-   audioItem.loop = true;
-   audioItem.src = `audio/${audioFile}`;
-   audioItem.load();
-   audioItem.volume = volSlider.value/100;
-   audioItem.play();
-   audioItem = null;
+    audioItem.style.display = "none";
+    audioItem.loop = true;
+    audioItem.src = `audio/${audioFile}`;
+    audioItem.load();
+    audioItem.volume = volSlider.value/100;
+    audioItem.play();
+    if(isAnyAudioSolo) {
+        audioItem.muted = true;
+        elem.classList.add("muted");
+    }
+    audioItem = null;
 }
 
 // this button does what the function says
@@ -229,11 +242,7 @@ function setVolume() {
     })
     console.log("volume is now: " + volSlider.value);
     if(volSlider.value == 0) {
-        muteBtn.classList.add("deactivated");
-        soloBtn.classList.add("deactivated");
-    } else {
-        muteBtn.classList.remove("deactivated");
-        soloBtn.classList.remove("deactivated");
+        console.log("I can't hear YOOOU!");
     }
 }
 
@@ -280,7 +289,7 @@ function dragInstrument(e) {
     showIconsByClass("instrument");
   }
 
-  if(e.type == "dragend") {
+  if((e.type == "dragend") && (selected != currentInstrument)) {
     if(musicZone.contains(currentInstrument))
         showIconsByClass("band");
     else
@@ -291,18 +300,34 @@ function dragInstrument(e) {
 
 // show or hide specific audio controls
 function showSpecificControls() {
-    if((this.classList.contains("instrument")) && (gameState > 0))
+    if((selected) || (gameState == 0)) return;
+
+    if (this == musicZone)
+        selected = this.firstElementChild;
+    else
+        selected = this;
+
+
+    if(this.classList.contains("instrument")){
         showIconsByClass("instrument");
+        playSfx("selected.ogg");
+    }
 
     volumeCon.classList.add("hidden");
     buttonCon.classList.remove("hidden");
-
-    selected = this;
-    
+        
     if(selected.classList.contains("instrument"))
         mainDjCon.classList.add("selected");
     else
         selected.parentNode.classList.add("selected");
+
+    for(let i=0; i < audioElements.length; i++){
+        if(audioElements[i].id == `${selected.id}-audio`) {
+            selectedAudio = audioElements[i];
+            console.log(`${selectedAudio.id} is found`);
+            break;
+        }
+    }
 
 }
 
@@ -318,9 +343,82 @@ function hideSpecificControls() {
         selected.parentNode.classList.remove("selected");
 
     selected = null;
+    selectedAudio = null;
 }
 
 // mute or solo audio 
+function muteAudio() {
+    if(!selectedAudio.muted){
+        selectedAudio.muted = true;
+        selected.classList.add("muted");
+        console.log("selected audio is muted");
+    }
+    else{
+        selectedAudio.muted = false;
+        selectedAudio.volume = volSlider.value/100;
+        selected.classList.remove("muted");
+        console.log("selected audio is unmuted");
+    }
+}
+
+// this one has the highest priority, even over mute
+function soloAudio() {
+    if(!isAnyAudioSolo){
+        selectedAudio.muted = false;
+        selectedAudio.volume = volSlider.value/100;
+        selected.classList.remove("remove");
+
+        for(let i=0; i < audioElements.length; i++){
+            if(audioElements[i].id == `${selected.id}-audio`) {
+                continue;
+            }
+            audioElements[i].muted = true;
+        }
+
+        isAnyAudioSolo = true;
+
+        muteBtn.classList.add("deactivated");
+
+        currentUnits.forEach((unit) => {
+            if(unit != selected)
+                unit.classList.add("muted");
+        })
+
+        console.log("selected audio is solo");
+
+    } else {
+        for(let i=0; i < audioElements.length; i++){
+            audioElements[i].muted = false;
+            audioElements[i].volume = volSlider.value/100;
+        }
+        isAnyAudioSolo = false;
+        muteBtn.classList.remove("deactivated");
+
+        currentUnits.forEach((unit) => {
+            unit.classList.remove("muted");
+        })
+
+        console.log("selected audio is not solo");
+    }
+}
+
+// Play random ambience sounds
+function playAmbience() {
+    if(currentUnits.length > 0) return;
+    let randomNum = Math.floor(Math.random() * 3) + 1;
+    ambience.src = `audio/ambience${randomNum}.mp3`;
+
+    ambience.volume = volSlider.value/200;
+    ambience.load();
+    ambience.play();
+}
+
+function playSfx(file){
+    sfx.src = `audio/${file}`;
+    sfx.load();
+    sfx.play();
+}
+
 
 // Event Listeners
 window.addEventListener("load", changeVolumeBar);
@@ -342,8 +440,8 @@ musicZone.addEventListener("dragover", defPrevent);
 musicZone.addEventListener("dragenter", playDjAnim); 
 musicZone.addEventListener("dragleave", stopDjAnim); 
 musicZone.addEventListener("drop", dropMusic);
+musicZone.addEventListener("click", showSpecificControls);
 
-//musicZone.addEventListener("click", showSpecificControls);
 returnBtn.addEventListener("click", hideSpecificControls);
 
 board.addEventListener("dragover", defPrevent);
@@ -353,5 +451,5 @@ playBtn.addEventListener("click", playPauseAudio);
 rewindBtn.addEventListener("click", rewindAudio);
 volSlider.addEventListener("change", setVolume);
 
-//muteBtn.addEventListener("click", muteAudio);
-//soloBtn.addEventListener("click", soloAudio);
+muteBtn.addEventListener("click", muteAudio);
+soloBtn.addEventListener("click", soloAudio);
