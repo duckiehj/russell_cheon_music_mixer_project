@@ -86,6 +86,5 @@ When the user clicks on any character, two more buttons will appear. One is to m
 Documenting bugs
 There is a bug. This is the way to trigger it.
 First, drag an instrument to the DJ. The board will change to band icons instead of instruments.
-Next, drag in a band member, then remove the instrument from the DJ
-After that, select the empty zone of the DJ
-Finally, drag again another instrument and tap the zone again. It will flash as if this is not allowed
+Next, remove the instrument by dragging it back to the board. Then, select the empty DJ zone.
+Add in any instrument to the DJ zone again, and click it. It will flash as if this is not allowed.
