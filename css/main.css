@@ -21,7 +21,6 @@ body {
 }
 
 #sidebar {
-    background-color: powderblue;
     min-width: 269px;
     width: 31vw;
 }
@@ -389,8 +388,27 @@ body {
         }
 
 /* SIDEBAR */
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url(../images/map.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 #sidebar p {
     font-size: 25px;
+    padding: 2vh;
+    position: relative;
+    height: 30vh;
+}
+
+#sidebar .bottom-img {
+    width: 80%;
+    height: 40%;
+    align-self: flex-end;
+    cursor: pointer;
 }
 
 /* CHARACTERS */
