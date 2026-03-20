@@ -413,9 +413,6 @@ h2 {
             background-color: #0D8FED;
         }
 
-        .spot.selected::before {
-            background-color: #cef8ff;
-        }
 
         #main-dj-dz.highlight::before {
             background-color: #eff9ff !important;
@@ -431,12 +428,17 @@ h2 {
             cursor: pointer;
         }
 
+
         .spot:has(.obj.muted) .obj, .spot:has(.obj.muted) #main-dj {
             filter: brightness(50%);
         }
 
         .spot:has(.obj.muted)::before {
             background-color: #0D8FED;
+        }
+
+        .spot:has(.obj.selected)::before {
+            background-color: #cef8ff;
         }
 
         #music-dz .obj {
@@ -577,7 +579,7 @@ h2 {
 }
 
 /* OTHER ANIMATIONS */
-.selected.emphasized::before {
+.spot:has(.selected.emphasized)::before {
     animation: select-emph 0.3s 5 forwards;
 }
 

@@ -324,12 +324,11 @@ function showSpecificControls() {
     // prevents user selecting another unit without pressing return
     if(selected) {
         if(!this.contains(selected)){
-            let selectedZone = selected.closest(".spot");
-            selectedZone.classList.remove("emphasized");
+            selected.classList.remove("emphasized");
             // trigger reflow
-            void selectedZone.offsetWidth;
-            selectedZone.classList.add("emphasized");
-            console.log("Press the return button before selecting another");
+            void selected.offsetWidth;
+            selected.classList.add("emphasized");
+            console.log("Click the return button before selecting another");
         }
         return; 
     }
@@ -338,8 +337,7 @@ function showSpecificControls() {
     selected = this.firstElementChild;
     if(!selected) selected = this;
 
-    let selectedZone = selected.closest(".spot");
-    selectedZone.classList.add("selected");
+    selected.classList.add("selected");
 
     // shows only its type (instruments/band members) on board
     if(selected.classList.contains("instrument")){
@@ -379,9 +377,8 @@ function hideSpecificControls(e) {
 
     if(!selected) return;
 
-    let selectedZone = selected.closest(".spot");
-    selectedZone.classList.remove("selected");
-    selectedZone.classList.remove("emphasized");
+    selected.classList.remove("selected");
+    selected.classList.remove("emphasized");
 
     muteBtn.classList.remove("deactivated");
     soloBtn.classList.remove("deactivated");
