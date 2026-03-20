@@ -1,5 +1,3 @@
-/* the final look will definitely look completely different from this layout! */
-
 body {
     font-family: 'Lato', Arial, sans-serif;
     background-color: antiquewhite;
@@ -98,26 +96,15 @@ body {
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
+            transform: translateY(-13%);
+            opacity: 0;
+            animation: show 600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards; /*courtesy of thinkdobecreate.com*/
             /*background-color: #0D8FED;*/
         }
 
         span.icon {
             width: 17%;
         }
-
-    #return-btn {
-        width: 10%;
-        border: none;
-        justify-self: end;
-        background-color: transparent;
-        border-radius: 10px;
-        cursor: pointer;
-        order: 1;
-    }
-
-    #return-btn:hover {
-        background-color: #B87638;
-    }
 
     
     .audio-ctrl {
@@ -130,17 +117,53 @@ body {
     }
 
     .audio-ctrl button {
-        width: 40%;
+        width: 30%;
         background-color: transparent;
         border: none;
         cursor: pointer;
         display: block;
         margin: 0 auto;
+        cursor: pointer;
+    }
+
+    .audio-ctrl button:hover {
+        filter: brightness(90%);
+    }
+
+    .audio-ctrl button:active {
+        filter: brightness(110%) hue-rotate(-10deg);
+        transform: scale(90%);
     }
 
     .audio-icon {
         width: 100%;
         pointer-events: none;
+    }
+
+
+    #rew-btn {
+        width: 40%;
+        margin: 0 auto 7%;
+    }
+
+
+    #btn-con {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #btn-con button.deactivated {
+        filter: brightness(50%);
+        pointer-events: none;
+    }
+
+
+    #mute-btn-svg, #solo-btn-svg {
+        .st0{fill:#9E5A2A;}
+		.st1{fill:#FFB77B;}
+		.st2{fill:#A55F2B;}
+		.st3{display:none;}
     }
 
 
@@ -164,22 +187,6 @@ body {
         }
 
 
-
-
-
-    #rew-btn {
-        margin: 0 auto 7%;
-    }
-
-    #rew-btn:hover {
-        filter: brightness(90%);
-    }
-
-    #rew-btn:active {
-        filter: brightness(110%) hue-rotate(-10deg);
-        transform: scale(90%);
-    }
-
     #volume-con {
         width: 100%;
         display: grid;
@@ -199,6 +206,10 @@ body {
         cursor: pointer;
         overflow: hidden;
     }    
+
+    #vol-slider:hover {
+        filter: brightness(90%);
+    }
 
     #vol-slider::-webkit-slider-thumb{
         -webkit-appearance: none;
@@ -254,6 +265,11 @@ body {
         width: 27%;
         justify-items: center;
         align-items: end;
+        cursor: pointer;
+    }
+
+    .spot.drop-zone:hover::before {
+        filter: brightness(90%);
     }
 
     #main-dj-dz {
@@ -294,7 +310,7 @@ body {
     }
 
     #main-dj-dz:has(#music-dz:hover)::before {
-        filter: brightness(50%);
+        filter: brightness(95%);
     }
 
     #main-dj-dz:has(.dj-playing) .instrument {
@@ -324,6 +340,10 @@ body {
             background-color: #0D8FED;
         }
 
+        .spot.selected::before {
+            background-color: #cef8ff;
+        }
+
         #main-dj-dz.highlight::before {
             background-color: #eff9ff !important;
         }
@@ -336,6 +356,14 @@ body {
             background-position: 50% 80%;
             z-index: 2;
             cursor: pointer;
+        }
+
+        .spot:has(.obj.muted) .obj, .spot:has(.obj.muted) #main-dj {
+            filter: brightness(50%);
+        }
+
+        .spot:has(.obj.muted)::before {
+            background-color: #0D8FED;
         }
 
         #music-dz .obj {
@@ -360,7 +388,7 @@ body {
             pointer-events: none;
         }
 
-
+/* SIDEBAR */
 #sidebar p {
     font-size: 25px;
 }
@@ -479,11 +507,32 @@ body {
     background-image: url(../images/whale-icon.svg);
 }
 
+/* OTHER ANIMATIONS */
+.selected.emphasized::before {
+    animation: select-emph 0.3s 5 forwards;
+}
+
+@keyframes select-emph {
+    50% {
+        background-color: #6a4f8b;
+    }
+    100% {
+        background-color: #cef8ff;
+    }
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .selected {
-    animation: selected 0.5s infinite;
+    animation: selected 1s infinite;
 }
 
 @keyframes selected {
-    30%{transform: translateY(2%);}
-    70%{transform: translateY(-2%);}
+    30%{transform: scale(103%);}
+    70%{transform: scale(97%);}
 }
