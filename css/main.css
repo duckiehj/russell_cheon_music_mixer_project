@@ -341,7 +341,7 @@ body {
         }
 
         .spot.selected::before {
-            background-color: #cef8ff !important;
+            background-color: #cef8ff;
         }
 
         #main-dj-dz.highlight::before {
@@ -508,8 +508,8 @@ body {
 }
 
 /* OTHER ANIMATIONS */
-.emphasized::before {
-    animation: select-emph 0.2s 5 forwards;
+.selected.emphasized::before {
+    animation: select-emph 0.3s 5 forwards;
 }
 
 @keyframes select-emph {

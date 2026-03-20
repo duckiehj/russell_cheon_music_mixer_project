@@ -317,8 +317,16 @@ function dragInstrument(e) {
 function showSpecificControls() {
     if(gameState == 0) return;
 
+    // prevents user selecting another unit prematurely
     if(selected) {
-        
+        if(!this.contains(selected)){
+            let selectedZone = selected.closest(".spot");
+            selectedZone.classList.remove("emphasized");
+            /* trigger reflow */
+            void selectedZone.offsetWidth;
+            selectedZone.classList.add("emphasized");
+        }
+        console.log("Press the return button before selecting another");
         return; 
     }
 
@@ -345,7 +353,7 @@ function showSpecificControls() {
             break;
         }
     }
-    console.log(selected.id);
+    console.log(`Now selecting ${selected.id}`);
 }
 
 function hideSpecificControls(e) {
@@ -359,6 +367,7 @@ function hideSpecificControls(e) {
 
     let selectedZone = selected.closest(".spot");
     selectedZone.classList.remove("selected");
+    selectedZone.classList.remove("emphasized");
 
     selected = null;
     selectedAudio = null;
