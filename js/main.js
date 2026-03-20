@@ -322,17 +322,18 @@ function showSpecificControls() {
         return; 
     }
 
-    // shows only its type (instruments/band members) on board
-    if(this.classList.contains("instrument")){
-        showIconsByClass("instrument");
-        mainDjCon.classList.add("selected");
-    } else if (this.classList.contains("band")){
-        this.parentNode.classList.add("selected");
-        showIconsByClass("band");
-    }
-
     selected = this.firstElementChild;
     if(!selected) selected = this;
+
+    let selectedZone = selected.closest(".spot");
+    selectedZone.classList.add("selected");
+
+    // shows only its type (instruments/band members) on board
+    if(selected.classList.contains("instrument")){
+        showIconsByClass("instrument");
+    } else if (selected.classList.contains("band")){
+        showIconsByClass("band");
+    }
 
     volumeCon.classList.add("hidden");
     buttonCon.classList.remove("hidden");
@@ -356,12 +357,9 @@ function hideSpecificControls(e) {
 
     if(!selected) return;
 
-    if(selected.classList.contains("instrument")){
-        mainDjCon.classList.remove("selected");
-    }
-    else{
-        selected.parentNode.classList.remove("selected");
-    }
+    let selectedZone = selected.closest(".spot");
+    selectedZone.classList.remove("selected");
+
     selected = null;
     selectedAudio = null;
 }
