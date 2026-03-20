@@ -50,7 +50,6 @@ let selectedAudio = null;
 
 let hasAnyMusicStarted = false;
 let isAnyAudioSolo = false;
-
 let gameState = 0;
 let boardState = "instrument";
 

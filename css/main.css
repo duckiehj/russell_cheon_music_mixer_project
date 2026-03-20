@@ -1,38 +1,112 @@
 body {
     font-family: 'Lato', Arial, sans-serif;
-    background-color: antiquewhite;
+    background-color: #eec9a8;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath fill='%23515151' fill-opacity='0.1' d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/svg%3E");
 }
 
+@font-face {
+    font-family: "Pieces of Eight";
+    src: url(../fonts/PiecesOfEight.woff);
+}
+
+:root {
+    font-size: 11px;
+}
 
 
 #main-container {
     display: flex;
-    justify-content: space-evenly;
-    padding: 2vw 0;
+    justify-content: space-around;
+    align-items: start;
     min-width: 840px;
+    margin: 5vh 0 20px;
 }
 
 #main-box {
     background-color: transparent;
     min-width: 538px;
-    padding-top: 15px;
-    width: 63vw;
+    width: 58vw;
     text-align: left;
 }
 
+/* SIDEBAR */
 #sidebar {
     min-width: 269px;
     width: 31vw;
+    aspect-ratio: 839/1245;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    background-image: url(../images/map.svg);
+    background-size: 75%;
+    background-position: 40% 80%;
+    background-repeat: no-repeat;
+    order: -1;
 }
 
-#game-area {
+#intro {
+    display: grid;
     width: 100%;
-    border-radius: 25px;
+    padding: 7% 5%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: #fff4df;
+    color: #000000;
+}
+
+h2 {
+    font-family: 'Pieces of Eight', Times, serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    align-self: flex-end;
+}
+
+#intro p {
+    font-size: 1.15rem;
+}
+
+#speech {
+    font-size: 1.5rem;
+    padding: 5vh;
+    background-color: greenyellow;
+
+}
+
+#sidebar .bottom-img {
+    width: 80%;
+    height: 40%;
+    align-self: flex-end;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        font-size: 16px;
+    }
+
+    #speech {
+        font-size: 1.25rem;
+    }
+}
+
+
+#game-area {
     overflow: hidden;
     aspect-ratio: 1.442/1;
-    margin-top: 20px;
     background-image: linear-gradient(#77C2FC 0%, #D5EEFF 15%);
+    border-radius: 15px;
+    border: #3b3333 10px solid;
 }
+
+#game-area-frame{
+    width: 100%;
+    margin-top: 2vh;
+    border: 2vw solid transparent;
+    border-image: url(../images/wooden-frame-1.svg) 30 stretch;
+}
+
 
 #sea-bg {
     display: grid;
@@ -387,29 +461,6 @@ body {
             pointer-events: none;
         }
 
-/* SIDEBAR */
-#sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-image: url(../images/map.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-#sidebar p {
-    font-size: 25px;
-    padding: 2vh;
-    position: relative;
-    height: 30vh;
-}
-
-#sidebar .bottom-img {
-    width: 80%;
-    height: 40%;
-    align-self: flex-end;
-    cursor: pointer;
-}
 
 /* CHARACTERS */
 
