@@ -120,13 +120,11 @@ function dropMusic(e) {
 
     if(gameState == 0) gameState++;
 
-    if (!hasAnyMusicStarted){
+    if (!currentInstrument){
         currentInstrument = dragItem;
         showIconsByClass("band");
         currentInstrument.addEventListener("dragstart", dragInstrument);
         currentInstrument.addEventListener("dragend", dragInstrument);
-
-        hasAnyMusicStarted = true;
     }
 }
 
@@ -316,7 +314,6 @@ function dragInstrument(e) {
         showIconsByClass("band");
     else
         currentInstrument = null;
-        hasAnyMusicStarted = false;
   }
 }
 
