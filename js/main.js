@@ -145,6 +145,9 @@ function appendAudio(elem){
     pauseIcon.classList.remove("st7");
     playIcon.classList.add("st7");
 
+    muteBtn.classList.remove("deactivated");
+    soloBtn.classList.remove("deactivated");
+
     dragItem.addEventListener("click", showSpecificControls);
 }
 
@@ -321,19 +324,20 @@ function dragInstrument(e) {
 function showSpecificControls() {
     if(gameState == 0) return;
 
-    // prevents user selecting another unit prematurely
+    // prevents user selecting another unit without pressing return
     if(selected) {
         if(!this.contains(selected)){
             let selectedZone = selected.closest(".spot");
             selectedZone.classList.remove("emphasized");
-            /* trigger reflow */
+            // trigger reflow
             void selectedZone.offsetWidth;
             selectedZone.classList.add("emphasized");
+            console.log("Press the return button before selecting another");
         }
-        console.log("Press the return button before selecting another");
         return; 
     }
 
+    //assigns selected element: either it's the unit, or the DJ's zone itself
     selected = this.firstElementChild;
     if(!selected) selected = this;
 
@@ -347,17 +351,26 @@ function showSpecificControls() {
         showIconsByClass("band");
     }
 
+    console.log(`Now selecting ${selected.id}`);
+
+    // shows the new buttons in place of the volume slider
     volumeCon.classList.add("hidden");
     buttonCon.classList.remove("hidden");
 
-    for(let i=0; i < audioElements.length; i++){
-        if(audioElements[i].id == `${selected.id}-audio`) {
-            selectedAudio = audioElements[i];
-            console.log(`${selectedAudio.id} is found`);
-            break;
+    // for the DJ's zone without an instrument, these can't be clicked
+    if(selected == musicZone) {
+        muteBtn.classList.add("deactivated");
+        soloBtn.classList.add("deactivated");
+    } else {
+        // for other units, find the associated audio
+        for(let i=0; i < audioElements.length; i++){
+            if(audioElements[i].id == `${selected.id}-audio`) {
+                selectedAudio = audioElements[i];
+                console.log(`${selectedAudio.id} is found`);
+                break;
+            }
         }
     }
-    console.log(`Now selecting ${selected.id}`);
 }
 
 function hideSpecificControls(e) {
@@ -372,6 +385,9 @@ function hideSpecificControls(e) {
     let selectedZone = selected.closest(".spot");
     selectedZone.classList.remove("selected");
     selectedZone.classList.remove("emphasized");
+
+    muteBtn.classList.remove("deactivated");
+    soloBtn.classList.remove("deactivated");
 
     selected = null;
     selectedAudio = null;
