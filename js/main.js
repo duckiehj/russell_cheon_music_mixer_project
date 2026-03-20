@@ -22,6 +22,11 @@ const soloBtn = document.querySelector("#solo-btn");
 const playIcon = document.querySelector("#play-icon");
 const pauseIcon = document.querySelector("#pause-icon");
 
+const muteIcon = document.querySelector("#muteIcon");
+const unmuteIcon = document.querySelector("#unmuteIcon");
+const soloIcon = document.querySelector("#soloIcon");
+const unsoloIcon = document.querySelector("#unsoloIcon");
+
 const volumeCon = document.querySelector("#volume-con");
 const buttonCon = document.querySelector("#btn-con");
 
@@ -379,12 +384,18 @@ function muteAudio() {
         selectedAudio.muted = true;
         selected.classList.add("muted");
         console.log("selected audio is muted");
+
+        muteIcon.classList.toggle("st3");
+        unmuteIcon.classList.toggle("st3");
     }
     else{
         selectedAudio.muted = false;
         selectedAudio.volume = volSlider.value/100;
         selected.classList.remove("muted");
         console.log("selected audio is unmuted");
+
+        muteIcon.classList.toggle("st3");
+        unmuteIcon.classList.toggle("st3");
     }
 }
 
@@ -413,6 +424,9 @@ function soloAudio() {
 
         console.log("selected audio is solo");
 
+        soloIcon.classList.toggle("st3");
+        unsoloIcon.classList.toggle("st3");
+
     } else {
         for(let i=0; i < audioElements.length; i++){
             audioElements[i].muted = false;
@@ -425,7 +439,10 @@ function soloAudio() {
             unit.classList.remove("muted");
         })
 
-        console.log("selected audio is not solo");
+        console.log("selected audio is no longer solo");
+
+        soloIcon.classList.toggle("st3");
+        unsoloIcon.classList.toggle("st3");
     }
 }
 
