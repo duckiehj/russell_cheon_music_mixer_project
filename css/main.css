@@ -1,6 +1,6 @@
 body {
     font-family: 'Lato', Arial, sans-serif;
-    background-color: rgb(132, 123, 114);
+    background-color: rgb(255, 230, 104);
 }
 
 
@@ -23,21 +23,23 @@ body {
 #sidebar {
     min-width: 269px;
     width: 31vw;
+    aspect-ratio: 839/1245;
 }
 
 
 
 #intro {
     display: grid;
-    height: 15%;
     width: 100%;
-    background-image: url(../images/plank2.svg);
-    background-size: cover;
+    margin: 5vh 8vh 8vh;
+
 }
 
 #intro .text {
-    grid-column: 1/-1;
+    grid-area: 1/-1;
 }
+
+
 
 #game-area {
     overflow: hidden;
@@ -50,7 +52,7 @@ body {
 #game-area-frame{
     width: 100%;
     margin-top: 2vh;
-    border: 2vw solid transparent;
+    border: 1vw solid transparent;
     border-image: url(../images/wooden-frame-1.svg) 30 stretch;
 }
 
