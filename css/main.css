@@ -96,6 +96,9 @@ body {
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
+            transform: translateY(-13%);
+            opacity: 0;
+            animation: show 600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards; /*courtesy of thinkdobecreate.com*/
             /*background-color: #0D8FED;*/
         }
 
@@ -204,6 +207,10 @@ body {
         overflow: hidden;
     }    
 
+    #vol-slider:hover {
+        filter: brightness(90%);
+    }
+
     #vol-slider::-webkit-slider-thumb{
         -webkit-appearance: none;
         display: block;
@@ -262,7 +269,7 @@ body {
     }
 
     .spot.drop-zone:hover::before {
-        filter: brightness(70%);
+        filter: brightness(90%);
     }
 
     #main-dj-dz {
@@ -303,7 +310,7 @@ body {
     }
 
     #main-dj-dz:has(#music-dz:hover)::before {
-        filter: brightness(70%);
+        filter: brightness(95%);
     }
 
     #main-dj-dz:has(.dj-playing) .instrument {
@@ -381,7 +388,7 @@ body {
             pointer-events: none;
         }
 
-
+/* SIDEBAR */
 #sidebar p {
     font-size: 25px;
 }
@@ -498,6 +505,27 @@ body {
 
 #whale.icon {
     background-image: url(../images/whale-icon.svg);
+}
+
+/* OTHER ANIMATIONS */
+.emphasized::before {
+    animation: select-emph 0.2s 5 forwards;
+}
+
+@keyframes select-emph {
+    50% {
+        background-color: #6a4f8b;
+    }
+    100% {
+        background-color: #cef8ff;
+    }
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .selected {

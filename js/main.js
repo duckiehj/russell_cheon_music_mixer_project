@@ -99,6 +99,7 @@ function dropBand(e) {
 
     hidePreview(e);
     appendAudio(this);
+    playSfx("water_drop.wav");
 }
 
 function dropMusic(e) {
@@ -110,6 +111,7 @@ function dropMusic(e) {
 
     // show the band member icons again
     appendAudio(this);
+    playSfx("selected.ogg");
     mainDjCon.classList.remove("highlight");
 
     if(gameState == 0) gameState++;
@@ -134,7 +136,6 @@ function appendAudio(elem){
     dragItem.classList.add("obj");
 
     playAmbience();
-    playSfx("water_drop.wav");
 
     startAudio(dragItem);
     pauseIcon.classList.remove("st7");
@@ -144,12 +145,21 @@ function appendAudio(elem){
 }
 
 
-// revert the character to its icon once released back
+// reverts the character to its icon once released back
 function dropBack(e) {
     e.preventDefault();
 
     //prevents instrument and band icons together on the board
     if (!dragItem.classList.contains(boardState)) return;
+
+    //cancels selected and solo items
+    if(dragItem == selected) {
+        hideSpecificControls(e);
+    };
+
+    if(isAnyAudioSolo) {
+        soloAudio();
+    }
 
     //console.log(`${dragItem.id} was dropped back to start`);
     iconZone.appendChild(dragItem);
@@ -231,7 +241,10 @@ function playPauseAudio() {
 // restart and set volume to all audios
 function rewindAudio() {
     audioElements.forEach((elem) => {
-        elem.currentTime = 0;
+        if(elem.classList.contains("band"))
+            elem.currentTime = 0;
+        else
+            elem.currentTime -= 5;
     })
 }
 
@@ -254,7 +267,8 @@ function clickBrighten() {
     rewindBtn.classList.toggle("clicked");
 }
 
-// Animations for the DJ
+// Animations for the DJ 
+// (won't play if not an instrument dragged over)
 function playDjAnim() {
     if(dragItem.classList.contains("band")) return;
     if(musicZone.firstElementChild) return;
@@ -283,7 +297,8 @@ function showIconsByClass(type) {
     }
 }
 
-// if it's still in the DJ zone, revert again
+// show instrument board if an instrument is dragged
+// hide the instrument board again if the instrument is not dropped back
 function dragInstrument(e) {
   if (e.type == "dragstart") {
     showIconsByClass("instrument");
@@ -298,28 +313,29 @@ function dragInstrument(e) {
   }
 }
 
-// show or hide specific audio controls
+// show or hide specific audio controls (mute/solo)
 function showSpecificControls() {
-    if((selected) || (gameState == 0)) return;
+    if(gameState == 0) return;
 
-    if (this == musicZone)
-        selected = this.firstElementChild;
-    else
-        selected = this;
+    if(selected) {
+        
+        return; 
+    }
 
-
+    // shows only its type (instruments/band members) on board
     if(this.classList.contains("instrument")){
         showIconsByClass("instrument");
-        playSfx("selected.ogg");
+        mainDjCon.classList.add("selected");
+    } else if (this.classList.contains("band")){
+        this.parentNode.classList.add("selected");
+        showIconsByClass("band");
     }
+
+    selected = this.firstElementChild;
+    if(!selected) selected = this;
 
     volumeCon.classList.add("hidden");
     buttonCon.classList.remove("hidden");
-        
-    if(selected.classList.contains("instrument"))
-        mainDjCon.classList.add("selected");
-    else
-        selected.parentNode.classList.add("selected");
 
     for(let i=0; i < audioElements.length; i++){
         if(audioElements[i].id == `${selected.id}-audio`) {
@@ -328,20 +344,24 @@ function showSpecificControls() {
             break;
         }
     }
-
+    console.log(selected.id);
 }
 
-function hideSpecificControls() {
-    showIconsByClass("band");
+function hideSpecificControls(e) {
+    if(e.type == "click")
+        showIconsByClass("band");
 
     volumeCon.classList.remove("hidden");
     buttonCon.classList.add("hidden");
 
-    if(selected.classList.contains("instrument"))
-        mainDjCon.classList.remove("selected");
-    else
-        selected.parentNode.classList.remove("selected");
+    if(!selected) return;
 
+    if(selected.classList.contains("instrument")){
+        mainDjCon.classList.remove("selected");
+    }
+    else{
+        selected.parentNode.classList.remove("selected");
+    }
     selected = null;
     selectedAudio = null;
 }
@@ -366,7 +386,7 @@ function soloAudio() {
     if(!isAnyAudioSolo){
         selectedAudio.muted = false;
         selectedAudio.volume = volSlider.value/100;
-        selected.classList.remove("remove");
+        selected.classList.remove("muted");
 
         for(let i=0; i < audioElements.length; i++){
             if(audioElements[i].id == `${selected.id}-audio`) {
