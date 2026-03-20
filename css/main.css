@@ -152,9 +152,16 @@ body {
 
     #btn-con button.deactivated {
         filter: brightness(50%);
+        pointer-events: none;
     }
 
 
+    #mute-btn-svg, #solo-btn-svg {
+        .st0{fill:#9E5A2A;}
+		.st1{fill:#FFB77B;}
+		.st2{fill:#A55F2B;}
+		.st3{display:none;}
+    }
 
 
     #play-btn {
@@ -179,7 +186,7 @@ body {
 
     #volume-con {
         width: 100%;
-        display: none;
+        display: grid;
         place-items: center;
     }
 
@@ -251,6 +258,11 @@ body {
         width: 27%;
         justify-items: center;
         align-items: end;
+        cursor: pointer;
+    }
+
+    .spot.drop-zone:hover::before {
+        filter: brightness(70%);
     }
 
     #main-dj-dz {

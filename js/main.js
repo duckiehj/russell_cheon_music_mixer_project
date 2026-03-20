@@ -16,10 +16,19 @@ const playBtn = document.querySelector("#play-btn");
 const rewindBtn = document.querySelector("#rew-btn");
 const returnBtn = document.querySelector("#return-btn");
 
+const muteBtn = document.querySelector("#mute-btn");
+const soloBtn = document.querySelector("#solo-btn");
+
 const playIcon = document.querySelector("#play-icon");
 const pauseIcon = document.querySelector("#pause-icon");
+
+const volumeCon = document.querySelector("#volume-con");
+const buttonCon = document.querySelector("#btn-con");
+
 const volSlider = document.querySelector("#vol-slider");
 const volumeInd = document.querySelector("#volume-ind-bg");
+
+const currentUnits = document.querySelectorAll(".spot")
 
 const audioElements = [];
 
@@ -34,6 +43,7 @@ let hasAnyMusicStarted = false;
 let currentInstrument = null;
 let gameState = 0;
 let boardState = "instrument";
+
 
 // Functions
 // save the item to a variable once dragged
@@ -121,6 +131,8 @@ function appendAudio(elem){
     startAudio(dragItem);
     pauseIcon.classList.remove("st7");
     playIcon.classList.add("st7");
+
+    dragItem.addEventListener("click", showSpecificControls);
 }
 
 
@@ -216,6 +228,13 @@ function setVolume() {
         elem.volume = volSlider.value/100;
     })
     console.log("volume is now: " + volSlider.value);
+    if(volSlider.value == 0) {
+        muteBtn.classList.add("deactivated");
+        soloBtn.classList.add("deactivated");
+    } else {
+        muteBtn.classList.remove("deactivated");
+        soloBtn.classList.remove("deactivated");
+    }
 }
 
 function changeVolumeBar() {
@@ -271,14 +290,40 @@ function dragInstrument(e) {
 }
 
 // show or hide specific audio controls
-function showSpecificControls(e) {
-    if((this == musicZone) && (gameState > 0))
+function showSpecificControls() {
+    if((this.classList.contains("instrument")) && (gameState > 0))
         showIconsByClass("instrument");
-    else if (this == returnBtn)
-        showIconsByClass("band");
+
+    volumeCon.classList.add("hidden");
+    buttonCon.classList.remove("hidden");
+
+    selected = this;
+    
+    if(selected.classList.contains("instrument"))
+        mainDjCon.classList.add("selected");
+    else
+        selected.parentNode.classList.add("selected");
+
 }
 
-// Event Listener
+function hideSpecificControls() {
+    showIconsByClass("band");
+
+    volumeCon.classList.remove("hidden");
+    buttonCon.classList.add("hidden");
+
+    if(selected.classList.contains("instrument"))
+        mainDjCon.classList.remove("selected");
+    else
+        selected.parentNode.classList.remove("selected");
+
+    selected = null;
+}
+
+// mute or solo audio 
+
+// Event Listeners
+window.addEventListener("load", changeVolumeBar);
 
 dragUnits.forEach((elem) => {
     elem.addEventListener("dragstart", dragStart);
@@ -290,12 +335,16 @@ dropZones.forEach((elem) => {
     elem.addEventListener("dragenter", showPreview);
     elem.addEventListener("dragleave", hidePreview);
     elem.addEventListener("drop", dropBand);
+    //elem.addEventListener("click", showSpecificControls);
 })
 
 musicZone.addEventListener("dragover", defPrevent); 
 musicZone.addEventListener("dragenter", playDjAnim); 
 musicZone.addEventListener("dragleave", stopDjAnim); 
 musicZone.addEventListener("drop", dropMusic);
+
+//musicZone.addEventListener("click", showSpecificControls);
+returnBtn.addEventListener("click", hideSpecificControls);
 
 board.addEventListener("dragover", defPrevent);
 board.addEventListener("drop", dropBack);
@@ -304,8 +353,5 @@ playBtn.addEventListener("click", playPauseAudio);
 rewindBtn.addEventListener("click", rewindAudio);
 volSlider.addEventListener("change", setVolume);
 
-
-musicZone.addEventListener("click", showSpecificControls);
-returnBtn.addEventListener("click", showSpecificControls);
-
-window.addEventListener("load", changeVolumeBar);
+//muteBtn.addEventListener("click", muteAudio);
+//soloBtn.addEventListener("click", soloAudio);
