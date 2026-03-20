@@ -8,14 +8,14 @@ body {
 #main-container {
     display: flex;
     justify-content: space-evenly;
-    padding: 2vw 0;
+    align-items: end;
     min-width: 840px;
+    margin: 5vh 0 7vh;
 }
 
 #main-box {
     background-color: transparent;
     min-width: 538px;
-    padding-top: 15px;
     width: 63vw;
     text-align: left;
 }
@@ -29,6 +29,7 @@ body {
 
 #intro {
     display: grid;
+    height: 15%;
     width: 100%;
     background-image: url(../images/plank2.svg);
     background-size: cover;
@@ -39,7 +40,6 @@ body {
 }
 
 #game-area {
-    width: 100%;
     overflow: hidden;
     aspect-ratio: 1.442/1;
     background-image: linear-gradient(#77C2FC 0%, #D5EEFF 15%);
@@ -48,8 +48,9 @@ body {
 }
 
 #game-area-frame{
-    margin-top: 20px;
-    border: 20px solid transparent;
+    width: 100%;
+    margin-top: 2vh;
+    border: 2vw solid transparent;
     border-image: url(../images/wooden-frame-1.svg) 30 stretch;
 }
 
