@@ -385,8 +385,8 @@ function muteAudio() {
         selected.classList.add("muted");
         console.log("selected audio is muted");
 
-        muteIcon.classList.toggle("st3");
-        unmuteIcon.classList.toggle("st3");
+        muteIcon.classList.add("st3");
+        unmuteIcon.classList.remove("st3");
     }
     else{
         selectedAudio.muted = false;
@@ -394,8 +394,8 @@ function muteAudio() {
         selected.classList.remove("muted");
         console.log("selected audio is unmuted");
 
-        muteIcon.classList.toggle("st3");
-        unmuteIcon.classList.toggle("st3");
+        muteIcon.classList.remove("st3");
+        unmuteIcon.classList.add("st3");
     }
 }
 
@@ -424,8 +424,8 @@ function soloAudio() {
 
         console.log("selected audio is solo");
 
-        soloIcon.classList.toggle("st3");
-        unsoloIcon.classList.toggle("st3");
+        soloIcon.classList.add("st3");
+        unsoloIcon.classList.remove("st3");
 
     } else {
         for(let i=0; i < audioElements.length; i++){
@@ -441,8 +441,8 @@ function soloAudio() {
 
         console.log("selected audio is no longer solo");
 
-        soloIcon.classList.toggle("st3");
-        unsoloIcon.classList.toggle("st3");
+        soloIcon.classList.remove("st3");
+        unsoloIcon.classList.add("st3");
     }
 }
 
