@@ -82,3 +82,56 @@ When the page first loaded, the band member icons are all hidden until the user 
 
 * f10 - Implement individual controls
 When the user clicks on any character, two more buttons will appear. One is to mute the character sound, the other (solo) is to mute all other sounds.
+
+BOARD / GAME LOGIC
+
+Game begins
+=> All icons are instruments
+Once first dragged and dropped to the DJ, shows: band member icons (instead)
+
+User taps on any playing unit (instruments/band)
+=> shows solo/mute
+
+User taps on DJ’s instrument or the DJ’s zone
+=> selects the instrument/zone
+=> shows instrument icons
+
+User taps on band members 
+=> selects the band member
+=> shows band icons
+
+
+User drags an instrument over
+	board shows instruments
+	=> drop
+	board shows band
+	=> not allowed
+
+User drags a band member over
+	board shows instruments
+	=> not allowed
+	board shows band
+	=> drop
+
+Selected, user taps on the back button
+	=> hides solo/mute
+	=> removes selection
+	board shows instruments
+	=> shows band member icons
+
+Zone selected, user drops an instrument to the DJ
+	=> selects the instrument instead of the zone
+
+User starts dragging on DJ’s instrument
+	board shows instruments
+	=> do nothing
+	board shows band
+	=> shows instruments temporarily
+
+
+User ends dragging on DJ’s instrument
+	band members shown and selected
+	=> show band members again
+
+	not selected anything (else)
+	=> keeps showing instrument icons
