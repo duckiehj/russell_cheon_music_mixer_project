@@ -1,4 +1,6 @@
 # Music Mixer Project by Russell and Jin
+![Treasure Chest](images/background.svg)
+
 This repo contains the submission for MMED-1055 Music Mixer project by Russell & Jin.
 
 This project is an interactive music mixer built with HTML, CSS, and JavaScript. The application allows users to create a custom audio experience by dragging and dropping sound elements, triggering audio playback and visual feedback to build a layered music mix. Inspired by interactive music tools such as Incredibox, the project encourages users to explore sound, rhythm, and composition through intuitive interaction. The focus of the project is on real-time user interaction, audio layering, and clear visual response within a browser-based environment.
