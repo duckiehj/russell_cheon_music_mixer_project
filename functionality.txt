@@ -135,16 +135,3 @@ User ends dragging on DJ’s instrument
 
 	not selected anything (else)
 	=> keeps showing instrument icons
-
-
-		
-
-
-
-
-
-Documenting bugs
-There is a bug. This is the way to trigger it.
-First, drag an instrument to the DJ. The board will change to band icons instead of instruments.
-Next, remove the instrument by dragging it back to the board. Then, select the empty DJ zone.
-Add in any instrument to the DJ zone again, and click it. It will flash as if this is not allowed.
