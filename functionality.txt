@@ -83,7 +83,7 @@ When the page first loaded, the band member icons are all hidden until the user 
 * f10 - Implement individual controls
 When the user clicks on any character, two more buttons will appear. One is to mute the character sound, the other (solo) is to mute all other sounds.
 
-BOARD / GAME LOGIC
+*f11 - Refine board logic
 
 Game begins
 => All icons are instruments
