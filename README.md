@@ -1,5 +1,5 @@
 # Music Mixer Project by Russell and Jin
-![Treasure Chest](images/Background_1.svg)
+![Treasure Chest](images/background.svg)
 
 This repo contains the submission for MMED-1055 Music Mixer project by Russell & Jin.
 
