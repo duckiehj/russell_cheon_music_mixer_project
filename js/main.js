@@ -27,6 +27,8 @@ const unmuteIcon = document.querySelector("#unmuteIcon");
 const soloIcon = document.querySelector("#soloIcon");
 const unsoloIcon = document.querySelector("#unsoloIcon");
 
+const speech = document.querySelector("#speech");
+
 const volumeCon = document.querySelector("#volume-con");
 const buttonCon = document.querySelector("#btn-con");
 
@@ -47,6 +49,8 @@ let currentInstrument = null;
 
 let selected = null;
 let selectedAudio = null;
+
+let currentText = "none";
 
 let hasAnyMusicStarted = false;
 let isAnyAudioSolo = false;
@@ -97,34 +101,41 @@ function hidePreview(e) {
 function dropBand(e) {
     e.preventDefault();
     if(dragItem.classList.contains("instrument")){
-        console.log("You can only drop band members here");
+        console.log("Ye may only drop crews here");
         return;
     }
 
     hidePreview(e);
     appendAudio(this);
-    playSfx("water_drop.wav");
 }
 
 function dropMusic(e) {
     e.preventDefault();
     if(dragItem.classList.contains("band")){
-        console.log("You can only drop instruments here");
+        console.log("Ye may only drop instruments here");
         return;
     }
 
     // show the band member icons again
     appendAudio(this);
-    playSfx("selected.ogg");
+    
     mainDjCon.classList.remove("highlight");
 
     if(gameState == 0) gameState++;
+    if(gameState == 1) {
+        speech.textContent = `Yarr! Now drag and drop ye the rest of the crew!`
+        gameState++;
+    }
 
     if (!currentInstrument){
         currentInstrument = dragItem;
         showIconsByClass("band");
         currentInstrument.addEventListener("dragstart", dragInstrument);
         currentInstrument.addEventListener("dragend", dragInstrument);
+    }
+
+    if(selected==musicZone) {
+        hideSpecificControls(e);
     }
 }
 
@@ -138,6 +149,7 @@ function appendAudio(elem){
     dragItem.classList.add("obj");
 
     playAmbience();
+    playSfx("water_drop.wav");
 
     startAudio(dragItem);
     pauseIcon.classList.remove("st7");
@@ -342,6 +354,7 @@ function showSpecificControls() {
     // shows only its type (instruments/band members) on board
     if(selected.classList.contains("instrument")){
         showIconsByClass("instrument");
+        playSfx("selected.ogg");
     } else if (selected.classList.contains("band")){
         showIconsByClass("band");
     }
@@ -389,13 +402,14 @@ function hideSpecificControls(e) {
 
 // mute or solo audio 
 function muteAudio() {
+    if((!selectedAudio)||(isAnyAudioSolo)) return;
     if(!selectedAudio.muted){
         selectedAudio.muted = true;
         selected.classList.add("muted");
         console.log("selected audio is muted");
 
-        muteIcon.classList.toggle("st3");
-        unmuteIcon.classList.toggle("st3");
+        muteIcon.classList.add("st3");
+        unmuteIcon.classList.remove("st3");
     }
     else{
         selectedAudio.muted = false;
@@ -403,13 +417,14 @@ function muteAudio() {
         selected.classList.remove("muted");
         console.log("selected audio is unmuted");
 
-        muteIcon.classList.toggle("st3");
-        unmuteIcon.classList.toggle("st3");
+        muteIcon.classList.remove("st3");
+        unmuteIcon.classList.add("st3");
     }
 }
 
 // this one has the highest priority, even over mute
 function soloAudio() {
+    if(!selectedAudio) return;
     if(!isAnyAudioSolo){
         selectedAudio.muted = false;
         selectedAudio.volume = volSlider.value/100;
@@ -433,8 +448,8 @@ function soloAudio() {
 
         console.log("selected audio is solo");
 
-        soloIcon.classList.toggle("st3");
-        unsoloIcon.classList.toggle("st3");
+        soloIcon.classList.add("st3");
+        unsoloIcon.classList.remove("st3");
 
     } else {
         for(let i=0; i < audioElements.length; i++){
@@ -450,8 +465,8 @@ function soloAudio() {
 
         console.log("selected audio is no longer solo");
 
-        soloIcon.classList.toggle("st3");
-        unsoloIcon.classList.toggle("st3");
+        soloIcon.classList.remove("st3");
+        unsoloIcon.classList.add("st3");
     }
 }
 
@@ -470,6 +485,18 @@ function playSfx(file){
     sfx.src = `audio/${file}`;
     sfx.load();
     sfx.play();
+}
+
+// changes text for a while
+function showQuickSpeech(text) {
+    currentText = speech.textContent;
+    speech.textContent = text;
+    speech.classList.remove("emphText");
+    speech.classList.add("emphText");
+    void speech.offsetWidth;
+    timer = setTimeout(() => {
+        speech.textContent = currentText;
+    }, 2500);
 }
 
 
