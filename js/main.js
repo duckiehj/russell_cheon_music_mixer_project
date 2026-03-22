@@ -378,6 +378,16 @@ function showSpecificControls() {
                 break;
             }
         }
+
+        if(selectedAudio) {
+            if(isAnyAudioSolo) {
+                muteBtn.classList.add("deactivated");
+            }
+            if(selectedAudio.muted){
+                muteIcon.classList.add("st3");
+                unmuteIcon.classList.remove("st3");
+            }
+        }
     }
 }
 
