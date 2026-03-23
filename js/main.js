@@ -41,6 +41,7 @@ const sfx = document.querySelector("#special-sfx");
 const currentUnits = [];
 const audioElements = [];
 
+let unit = null;
 let dragItem = null;
 let previewItem = null;
 
@@ -121,11 +122,8 @@ function dropMusic(e) {
     
     mainDjCon.classList.remove("highlight");
 
-    if(gameState == 0) gameState++;
-    if(gameState == 1) {
-        speech.textContent = `Yarr! Now drag and drop ye the rest of the crew!`
-        gameState++;
-    }
+    gameState++;
+    updateGameText();
 
     if (!currentInstrument){
         currentInstrument = dragItem;
@@ -159,6 +157,12 @@ function appendAudio(elem){
     soloBtn.classList.remove("deactivated");
 
     dragItem.addEventListener("click", showSpecificControls);
+
+    //update the text, but only if they have ever started a song
+    if(gameState > 0){
+        gameState++;
+        updateGameText();
+    }
 }
 
 
@@ -182,6 +186,15 @@ function dropBack(e) {
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("obj");   
     dragItem.classList.add("icon");     
+
+// removes the unit from the unit list
+    currentUnits.forEach((elem) => {
+        if(elem == dragItem) {
+            let i = currentUnits.indexOf(elem);
+            if(i > -1)
+                currentUnits.splice(i,1);
+        }
+    });
    
 // removes that audio layer for good
     audioElements.forEach((elem) => {
@@ -498,6 +511,20 @@ function playSfx(file){
 }
 
 // changes text for a while
+function updateGameText() {
+    console.log(currentUnits.length);
+if(gameState == 1)
+    speech.textContent = `Yarr! Now drag and drop ye the rest of the crew!`;
+if(gameState == 2)
+    speech.textContent = `Ye may tap on an instrument or a crewman to see more controls`;
+if(gameState == 3)
+    speech.textContent = `If ye want to swap crew or shanty, drag them back to the deck`;
+if(gameState == 4)
+    speech.textContent = `A full crew means we'll be drinkin' some rum`;
+if(currentUnits.length == 5)
+    speech.textContent = `Drink me hearties!`;
+}
+
 function showQuickSpeech(text) {
     currentText = speech.textContent;
     speech.textContent = text;
