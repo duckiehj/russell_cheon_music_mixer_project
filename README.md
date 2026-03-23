@@ -15,8 +15,10 @@ Feel free to explore our music mixer and enjoy it.
 No installation required, simply click the link to our webpage and enjoy our project 
 
 ## Usage
-* Drag a character icon into the drop zone. The character will play their accompanied song or sound.
+* Drag an instrument to the DJ, or a character icon into the drop zone. They will play their accompanied song or sound.
 * You can tap buttons to play and pause all the audios, as well as rewind them. Use the slider to adjust the volume.
+* Click on a character or instrument to select them, and control if their audio should be muted or solo
+* Drag them back to the starting board to stop their audio
 
 ## Contributing 
 1. Fork it!
