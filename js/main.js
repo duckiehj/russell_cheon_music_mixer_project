@@ -187,6 +187,9 @@ function dropBack(e) {
     dragItem.classList.remove("obj");   
     dragItem.classList.add("icon");     
 
+// makes this element not selectable anymore
+    dragItem.removeEventListener("click", showSpecificControls);
+
 // removes the unit from the unit list
     currentUnits.forEach((elem) => {
         if(elem == dragItem) {
