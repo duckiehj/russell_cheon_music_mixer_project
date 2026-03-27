@@ -1,4 +1,4 @@
-console.log('JS file connected');
+console.log('JS file be connected');
 
 // Variables
 const board = document.querySelector("#main-board");
@@ -53,18 +53,74 @@ let currentInstrument = null;
 let selected = null;
 let selectedAudio = null;
 
-let currentText = "none";
-
-let hasAnyMusicStarted = false;
+let timer = null;
+let hasAnyAudioStarted = false;
 let isAnyAudioSolo = false;
 let gameState = 0;
 let boardState = "instrument";
+
+let dialogue = {
+    primaryText:[
+        speech.textContent,
+        `Yarr! Now drag and drop ye the rest o' the crew!`,
+        `Ye may command 'n belay the choir wit' those buttons and the slider.`,
+        `Tap on an instrument or a crewman for direct commands. Drag'em back to the deck to swap.`,
+        `A full crew means we'll be drinkin' some rum`,
+        `Yohoho--- drink me hearties!🍾`],
+
+    secondaryText: "",
+    quickText: "",
+
+    currentText: "",
+
+    update: function() {
+        if (dialogue.quickText !== "") {
+            speech.innerHTML = dialogue.quickText;
+            return;
+        }
+
+        if (dialogue.secondaryText !== "") {
+            speech.innerHTML = dialogue.secondaryText;
+            return;
+        }
+
+        if(gameState <= 3){
+            this.currentText = this.primaryText[gameState];
+        } else {
+            if (currentUnits.length <  5)
+                this.currentText = this.primaryText[4];
+            else
+                this.currentText = this.primaryText[5];
+        }
+
+        speech.innerHTML = this.currentText;
+    },
+
+    showQuickSpeech: function(text, emphasis=false) {
+        this.quickText = text;
+        this.update();
+
+        if(emphasis){
+            speech.classList.remove("emphText");
+            speech.classList.add("emphText");
+            void speech.offsetWidth;
+        }
+
+        if(timer) clearTimeout(timer);
+
+        timer = setTimeout(() => {
+            this.quickText = "";
+            this.update();
+            speech.classList.remove("emphText");
+        }, 2500);
+    }
+}
 
 
 // Functions
 // save the item to a variable once dragged
 function dragStart() {
-   console.log(`you are dragging ${this.id}`);
+   console.log(`ye be dragging ${this.id}`);
    dragItem = this;
    setTimeout(visibleDrag,0);
 }
@@ -104,7 +160,7 @@ function hidePreview(e) {
 function dropBand(e) {
     e.preventDefault();
     if(dragItem.classList.contains("instrument")){
-        console.log("Ye may only drop crews here");
+        dialogue.showQuickSpeech("Ye may only drop crews here");
         return;
     }
 
@@ -115,7 +171,7 @@ function dropBand(e) {
 function dropMusic(e) {
     e.preventDefault();
     if(dragItem.classList.contains("band")){
-        console.log("Ye may only drop instruments here");
+        dialogue.showQuickSpeech("Ye may only drop instruments here");
         return;
     }
 
@@ -125,13 +181,13 @@ function dropMusic(e) {
     mainDjCon.classList.remove("highlight");
 
     gameState++;
-    updateGameText();
 
     if (!currentInstrument){
         currentInstrument = dragItem;
         showIconsByClass("band");
         currentInstrument.addEventListener("dragstart", dragInstrument);
         currentInstrument.addEventListener("dragend", dragInstrument);
+        dialogue.showQuickSpeech(`Now be playing:<br><span class="subspeech">${currentInstrument.dataset.songName}</span>`);
     }
 
     if(selected==musicZone) {
@@ -142,7 +198,7 @@ function dropMusic(e) {
 
 function appendAudio(elem){
     if (elem.firstElementChild) return;
-    console.log(`${dragItem.id} was dropped in the zone`);
+    console.log(`${dragItem.id} be in the water`);
     elem.appendChild(dragItem);
     
     dragItem.classList.remove("icon");
@@ -163,7 +219,7 @@ function appendAudio(elem){
     //update the text, but only if they have ever started a song
     if(gameState > 0){
         gameState++;
-        updateGameText();
+        dialogue.update();
     }
 }
 
@@ -173,7 +229,9 @@ function dropBack(e) {
     e.preventDefault();
 
     //prevents instrument and band icons together on the board
+    if (iconZone.contains(dragItem)) return;
     if (!dragItem.classList.contains(boardState)) return;
+    if (gameState < 2) return;
 
     //cancels selected and solo items
     if(dragItem == selected) {
@@ -184,7 +242,8 @@ function dropBack(e) {
         soloAudio();
     }
 
-    //console.log(`${dragItem.id} was dropped back to start`);
+    console.log(`${dragItem.id} be back on deck`);
+    dialogue.showQuickSpeech("They be back on the poop deck now.");
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("obj");   
     dragItem.classList.add("icon");     
@@ -237,17 +296,22 @@ function startAudio(elem) {
 
     if(elem.classList.contains("instrument")){
         mainMusic = audioItem;
+        audioItem.classList.add("instrument");
+    } else {
+        audioItem.classList.add("band");
     }
 
     mainbox.appendChild(audioItem);
 
 
-    audioItem.style.display = "none";
     audioItem.loop = true;
     audioItem.src = `audio/${audioFile}`;
     audioItem.load();
     audioItem.volume = volSlider.value/100;
     audioItem.play();
+
+    hasAnyAudioStarted = true;
+
     if(isAnyAudioSolo) {
         audioItem.muted = true;
         elem.classList.add("muted");
@@ -257,24 +321,39 @@ function startAudio(elem) {
 
 // this button does what the function says
 function playPauseAudio() {
-    audioElements.forEach((elem) => {
-       // change icon to play if the audio is paused, and vice versa
-        if(elem.paused){
-            elem.play(); 
-            playIcon.classList.add("st7");
-            pauseIcon.classList.remove("st7");
-            mainDj.classList.add("dj-playing");
-        } else {
+    // change icon to play if the audio is paused, and vice versa
+
+    if(!hasAnyAudioStarted){
+        audioElements.forEach((elem) => {
+            elem.play();
+        });
+
+        hasAnyAudioStarted = true;
+
+        playIcon.classList.add("st7");
+        pauseIcon.classList.remove("st7");
+        mainDj.classList.add("dj-playing");
+
+        dialogue.showQuickSpeech(`Aye aye, commence.`);
+    } else {
+        audioElements.forEach((elem) => {
             elem.pause();
-            playIcon.classList.remove("st7");
-            pauseIcon.classList.add("st7");
-            mainDj.classList.remove("dj-playing");
-        }
-    })
+        });
+        
+        hasAnyAudioStarted = false;
+
+        playIcon.classList.remove("st7");
+        pauseIcon.classList.add("st7");
+        mainDj.classList.remove("dj-playing");
+
+        dialogue.showQuickSpeech(`Belay choir, ye.`);
+    }
 }
 
 // restart and set volume to all audios
 function rewindAudio() {
+    dialogue.showQuickSpeech(`All hands, repeat.`);
+
     audioElements.forEach((elem) => {
         if(elem.classList.contains("band"))
             elem.currentTime = 0;
@@ -290,7 +369,7 @@ function setVolume() {
     })
     console.log("volume is now: " + volSlider.value);
     if(volSlider.value == 0) {
-        console.log("I can't hear YOOOU!");
+        dialogue.showQuickSpeech("I can't hear YOOOU!");
     }
 }
 
@@ -355,10 +434,10 @@ function showSpecificControls() {
     if(selected) {
         if(!this.contains(selected)){
             selected.classList.remove("emphasized");
-            // trigger reflow
+            // trigger reflow and animation
             void selected.offsetWidth;
             selected.classList.add("emphasized");
-            console.log("Click the return button before selecting another");
+            dialogue.showQuickSpeech("Tap on the back arrow button before ye command another", true);
         }
         return; 
     }
@@ -377,7 +456,8 @@ function showSpecificControls() {
         showIconsByClass("band");
     }
 
-    console.log(`Now selecting ${selected.id}`);
+    dialogue.secondaryText = `Use the square thingy buttons to silent or to single them out. Tap on the back button when ye are done.`;
+    console.log(`Now be selecting ${selected.id}`);
 
     // shows the new buttons in place of the volume slider
     volumeCon.classList.add("hidden");
@@ -392,7 +472,7 @@ function showSpecificControls() {
         for(let i=0; i < audioElements.length; i++){
             if(audioElements[i].id == `${selected.id}-audio`) {
                 selectedAudio = audioElements[i];
-                console.log(`${selectedAudio.id} is found`);
+                console.log(`${selectedAudio.id} be found`);
                 break;
             }
         }
@@ -407,6 +487,8 @@ function showSpecificControls() {
             }
         }
     }
+
+    dialogue.update();
 }
 
 function hideSpecificControls(e) {
@@ -417,6 +499,9 @@ function hideSpecificControls(e) {
     buttonCon.classList.add("hidden");
 
     if(!selected) return;
+
+    dialogue.secondaryText = "";
+    dialogue.update();
 
     selected.classList.remove("selected");
     selected.classList.remove("emphasized");
@@ -474,7 +559,7 @@ function soloAudio() {
                 unit.classList.add("muted");
         })
 
-        console.log("selected audio is solo");
+        dialogue.showQuickSpeech(`A crewmate be promoted! Yarr...`, true);
 
         soloIcon.classList.add("st3");
         unsoloIcon.classList.remove("st3");
@@ -491,7 +576,7 @@ function soloAudio() {
             unit.classList.remove("muted");
         })
 
-        console.log("selected audio is no longer solo");
+        console.log("selected audio be no longer singled");
 
         soloIcon.classList.remove("st3");
         unsoloIcon.classList.add("st3");
@@ -518,20 +603,6 @@ function playSfx(file){
     sfx.play();
 }
 
-// changes text for a while
-function updateGameText() {
-    console.log(currentUnits.length);
-if(gameState == 1)
-    speech.textContent = `Yarr! Now drag and drop ye the rest of the crew!`;
-if(gameState == 2)
-    speech.textContent = `Ye may tap on an instrument or a crewman to see more controls`;
-if(gameState == 3)
-    speech.textContent = `If ye want to swap crew or shanty, drag them back to the deck`;
-if(gameState == 4)
-    speech.textContent = `A full crew means we'll be drinkin' some rum`;
-if(currentUnits.length == 5)
-    speech.textContent = `Drink me hearties!`;
-}
 
 function checkAspectRatio(e) {
     e.preventDefault();
@@ -544,17 +615,6 @@ function checkAspectRatio(e) {
         alertScr.style.display = "none";
         mainGame.style.display = "flex";
     }
-}
-
-function showQuickSpeech(text) {
-    currentText = speech.textContent;
-    speech.textContent = text;
-    speech.classList.remove("emphText");
-    speech.classList.add("emphText");
-    void speech.offsetWidth;
-    timer = setTimeout(() => {
-        speech.textContent = currentText;
-    }, 2500);
 }
 
 
