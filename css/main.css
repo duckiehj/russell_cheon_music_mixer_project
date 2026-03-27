@@ -110,9 +110,13 @@ h2 {
     :root {
         font-size: clamp(16px, 1.05vw, 24px);
     }
+
+    h2 {
+        font-size: 1.6rem;
+    }
     
     #speech {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
 }
 
