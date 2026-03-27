@@ -495,6 +495,9 @@ function soloAudio() {
 
         soloIcon.classList.remove("st3");
         unsoloIcon.classList.add("st3");
+
+        muteIcon.classList.remove("st3");
+        unmuteIcon.classList.add("st3");
     }
 }
 
