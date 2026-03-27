@@ -28,6 +28,8 @@ const soloIcon = document.querySelector("#soloIcon");
 const unsoloIcon = document.querySelector("#unsoloIcon");
 
 const speech = document.querySelector("#speech");
+const mainGame = document.querySelector("#main-container")
+const alertScr = document.querySelector("#alert");
 
 const volumeCon = document.querySelector("#volume-con");
 const buttonCon = document.querySelector("#btn-con");
@@ -528,6 +530,19 @@ if(currentUnits.length == 5)
     speech.textContent = `Drink me hearties!`;
 }
 
+function checkAspectRatio(e) {
+    e.preventDefault();
+    let uvOrent = screen.orientation.type;
+
+    if(uvOrent == "portrait-primary"){
+        alertScr.style.display = "grid";
+        mainGame.style.display = "none";
+    } else {
+        alertScr.style.display = "none";
+        mainGame.style.display = "flex";
+    }
+}
+
 function showQuickSpeech(text) {
     currentText = speech.textContent;
     speech.textContent = text;
@@ -542,6 +557,8 @@ function showQuickSpeech(text) {
 
 // Event Listeners
 window.addEventListener("load", changeVolumeBar);
+window.addEventListener("load", checkAspectRatio);
+screen.orientation.addEventListener("change", checkAspectRatio);
 
 dragUnits.forEach((elem) => {
     elem.addEventListener("dragstart", dragStart);
