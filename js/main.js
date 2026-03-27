@@ -334,7 +334,8 @@ function playPauseAudio() {
         pauseIcon.classList.remove("st7");
         mainDj.classList.add("dj-playing");
 
-        dialogue.showQuickSpeech(`Aye aye, commence.`);
+        if(gameState > 0)
+            dialogue.showQuickSpeech(`Aye aye, commence.`);
     } else {
         audioElements.forEach((elem) => {
             elem.pause();
@@ -346,7 +347,8 @@ function playPauseAudio() {
         pauseIcon.classList.add("st7");
         mainDj.classList.remove("dj-playing");
 
-        dialogue.showQuickSpeech(`Belay choir, ye.`);
+        if(gameState > 0)
+            dialogue.showQuickSpeech(`Belay choir, ye.`);
     }
 }
 
