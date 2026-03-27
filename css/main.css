@@ -489,6 +489,37 @@ h2 {
         }
 
 
+#alert {
+    display: none;
+}
+
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    place-items: center;
+    z-index: 5;
+    background-color: #000000b9;
+}
+
+#alert section {
+    width: 40%;
+    text-align: center;
+    color: #fff;
+}
+
+#alert h2 {
+    font-family: 'Lato', Arial, sans-serif;
+}
+
+#alert img {
+    width: 10vw;
+    margin-bottom: 3vh;
+}
+
+
 /* CHARACTERS */
 
 #ship.obj {
