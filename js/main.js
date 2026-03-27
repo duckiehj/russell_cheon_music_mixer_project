@@ -308,9 +308,9 @@ function startAudio(elem) {
     audioItem.src = `audio/${audioFile}`;
     audioItem.load();
     audioItem.volume = volSlider.value/100;
-    audioItem.play();
 
-    hasAnyAudioStarted = true;
+    hasAnyAudioStarted = false;
+    playPauseAudio();
 
     if(isAnyAudioSolo) {
         audioItem.muted = true;
@@ -319,7 +319,7 @@ function startAudio(elem) {
     audioItem = null;
 }
 
-// this button does what the function says
+// this button will affect all audios
 function playPauseAudio() {
     // change icon to play if the audio is paused, and vice versa
 
@@ -332,9 +332,9 @@ function playPauseAudio() {
 
         playIcon.classList.add("st7");
         pauseIcon.classList.remove("st7");
-        mainDj.classList.add("dj-playing");
 
-        if(gameState > 0)
+        if(gameState == 0) return;
+            mainDj.classList.add("dj-playing");
             dialogue.showQuickSpeech(`Aye aye, commence.`);
     } else {
         audioElements.forEach((elem) => {
@@ -345,15 +345,17 @@ function playPauseAudio() {
 
         playIcon.classList.remove("st7");
         pauseIcon.classList.add("st7");
-        mainDj.classList.remove("dj-playing");
 
-        if(gameState > 0)
+        if(gameState == 0) return;
+            mainDj.classList.remove("dj-playing");
             dialogue.showQuickSpeech(`Belay choir, ye.`);
     }
 }
 
 // restart and set volume to all audios
 function rewindAudio() {
+    if(gameState==0) return;
+
     dialogue.showQuickSpeech(`All hands, repeat.`);
 
     audioElements.forEach((elem) => {
