@@ -117,16 +117,17 @@ User drags a crewman to the board
 	if board shows crewmen
 	=> drop back
 
-Selected an unit, user taps on the back button {
+Selected an unit, user taps on the back button
 	=> hides solo/mute
 	=> removes selection
 
 	if board shows instruments
 	=> shows crewman icons
-}
+
 
 The DJ's empty zone selected, user drops an instrument to the DJ
 	=> selects the instrument instead of this zone
+
 
 User starts dragging on DJ’s instrument
 	if board shows instruments
@@ -136,10 +137,9 @@ User starts dragging on DJ’s instrument
 
 
 User ends dragging on DJ’s instrument
-
 	if board shows crewmen before dragstart
-		a crewman is currently selected
+		if a crewman is currently selected
 		=> show crewmen icons again
 	
-	if nothing is selected
-		=> keeps showing instrument icons
+		if nothing is selected
+			=> keeps showing instrument icons
