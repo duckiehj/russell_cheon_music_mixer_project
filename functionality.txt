@@ -3,7 +3,7 @@ FUNCTIONALITY - Music Mixer
 Basic Functionality:
 
 drag an icon from the scroll to the drop zones
-once dragged, the icon becomes or is replaced by a band member or an instrument
+once dragged, the icon becomes or is replaced by a crewman or an instrument
 audio plays once dragged
 use the audio controls to adjust volume, play/pause, and rewind
 
@@ -11,7 +11,7 @@ use the audio controls to adjust volume, play/pause, and rewind
 Characters:
 There are two types of characters.
 First, users need to select an instrument for the DJ who plays the main song.
-After that, they will drag in 4 other band members who will sing the accompanied noises
+After that, they will drag in 4 other crewmen who will sing the accompanied noises
 In total there are 5 slots (1 for main DJ, 4 for others)
 
 
@@ -34,104 +34,112 @@ Main functionalities:
 f1 - Dragged icon becomes a character when dropped
 First, attach event listener to dragstart and save the dragged icon in a global variable. Attach event listeners for dragenter, dragover and drop to the zones with a forEach loop. Then use a function to remove default behaviors of the drop zones.
 
-For the drop event, add a function to append the icon. Then switch its CSS class to the one used to display the character.
+For the drop event of the zones, add a function to append the icon. Then switch its CSS class to the one used to display the character.
 
 Optionally, toggle a hidden class to the icon on a tray while on dragstart, and toggle it back off on dragend.
 
 * f2 - Character plays the audio once dropped
-We need to add an audio element into the DOM. Because there are many sounds to be mixed, we need to store them into an array, so declare an empty one at the start. This way there's no need to scan the document again to find all the audios we created.
+We need to add an audio element into the DOM. Because there are many sounds to be mixed, we need to store them into a global array, so declare an empty one at the start. This way there's no need to scan the document again to find all the audios we created.
 
 Once a character is in the drop zone, create a new audio element and attach it inside the document body. Add it into the array using push() and load it. Give it an id associated with the character using a convention. The audio source is to be matched with the one declared in the corresponding character's dataset from its html.
 
 Set the audio state to play and change the icon inside the play/pause button to pause by applying classes to the icon.
 
 * f3 - Play/pause button affects all the audios
-Add event listeners for the click event of the buttons. Loop through the audio array we created, and then check if each audio element is paused or not (in other words, playing). Then change the audio state to the opposite.
+Add event listeners for the click event of the play/pause button to call the playPauseAudio function. We need a global variable that indicates the play state of all the audios. It can be toggled between true and false. Inside the playPauseAudio function, first check if the play state variable is false (which should mean the audios are paused), then loop through the audio array we created and set them to play(). Then add the relevant animations and icon changes, and finally, change the audio play state to true. Do the opposite for when the play state is true and we need to pause the audios.
+
+Finally, because a newly dropped character will play their audio, then everyone should also start playing as well. Go back in the character drop function, change the play state to false and call the playPauseAudio function so it will make everyone play.
 
 * f4 - The same goes with volume and rewind controls
-Loop through the audio array, and for the rewind button, set the currentTime of each element to 0.
-Add event listener for change to the volume slider, and then set the volume property to the one calculated from its range value.
+Loop through the audio array, and for the rewind button, set the currentTime of each element to 0 (or the currentTime minus some seconds).
+Add event listener for the change event to the volume slider, and then set the volume property to the one calculated from its range value.
 
 * f5 - Character no longer plays the audio once dragged back to start
-Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Remove the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() to completely remove it.\
+Add the drop event listener to the original zone. When the character is dropped back, change the styling class to revert it into the icon. Use remove() on the audio element from the DOM using its id. Find the index of the audio in the array, and then use splice() array method to completely remove it.
 
-* f7 - Show a preview of a character on drop area when we drag an element over it
-On dragenter over a drop zone, set a function to add a dynamic preview element inside it. Set the preview's CSS class to ignore mouse events to prevent unexpected behaviors on dragleave. On dragleave and drop events, set another function to remove it for good. Although, for the drop event, this has to execute before the condition checks for if there is already an item inside the drop zone.
+* f6 - Show a preview of a character on drop area when we drag an element over it
+On dragenter over a drop zone, set a function to add a dynamic preview element inside it. Set the preview's CSS class to ignore mouse events to prevent unexpected behaviors on dragleave. On dragleave and drop events, set another function to remove it for good. Although, for the drop event, this has to be called before the condition checks for if there is already an item inside the drop zone.
 
-* f9 - Implement a DJ character who plays songs
+* f7 - Implement a DJ character who plays songs
 We can add a DJ character in the center who play real music, one song at a time. At first, user needs to drag to him one instrument corresponding to the songs. 
 
-However, his drop zone has to only accept the instruments and not other members. We can do this by checking the class of the drag item. By default, the musical instruments have a class of "instrument", and the other band members have a class of "band". So on, the drop event function, check the class of the dragItem. If the dragItem is "instrument" and it is within the drop zone of the DJ, it is accepted. Set the same check for the drop event of other drop zones, but these will accept the "band" class instead.
-
-
-
-FUTURE FEATURES (more if having enough time)
-* f6 - Optimize loading the characters
-This might be done by using svg and changing the code a bit. Instead of using external links to the CSS background-image or the <object> tags we should implement inline svgs, which will be placed at the end of the document, but are visually hidden. After that, we can use an <use> tag with a link to the id of the svg.
-
-So inside the initial tray, their <use> tags are linked to the ids of the icons. Once dropped into the zone and becomes a character, the script will change the link to that of the character.
-
-Update: I had to abandon using inline svgs as this direction has problems I can't resolve. I don't get why the inline svg becomes undraggable.
-
+However, his drop zone has to only accept the instruments and not other members. We can do this by checking the class of the drag item. By default, the musical instruments have a class of "instrument", and the other crewmen have a class of "band". So on, the drop event function, check the class of the dragItem. If the dragItem is "instrument" and it is within the drop zone of the DJ, it is accepted. Set the same check for the drop event of other drop zones, but these will accept the "band" class instead. This means there will be also two different functions for the two types on drop.
 
 * f8 - Show a lightbox requesting users to rotate device
-The game is not designed to play on portrait, so this will be needed. If somehow it can detect the user is using a small screen, the JS will add a covering element that tells the user to rotate their device. It also applies a visually hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
+The game is not designed to play on portrait, so this will be needed. Detect the change event to the screen.orientation property, and set a function to trigger displaying a covering element that tells the user to rotate their device. It also applies a hidden class to the main content. When the user finally does that, remove the lightbox and the applied visually hidden class.
 
 * f9 - Dynamically show or hide the types of icons
-When the page first loaded, the band member icons are all hidden until the user drops an icon to the DJ. We need a global variable to check if the user has done this. Once this happens, the instrument icons are hidden while the band member icons become displayed. If the user wants to change the instrument (and the song), they would need to click on the DJ, and the instrument icons will be visible again, along with a RETURN button. If they click on the RETURN button, or any of the band member, the icon tray reverts yet again to show the band members.
+When the page first loaded, the crewmen icons are all hidden until the user drops an icon to the DJ, and only instruments are shown. We need a global variable to check if the user has done this. Once this happens, the instrument icons are hidden while the crewmen icons become displayed.
+
+If the user wants to change the instrument (and the song), they would need to click on the DJ's zone to select it, and the instrument icons will be visible again, along with a BACK button. If they click on the BACK button, or any of the crewmen, the icon tray reverts yet again to show the crewmen. The tray will also temporarily show instrument icons if the user starts dragging on an instrument.
+
+Set up an utility function to show one type of icons and hide the other type, depending on the parameter. It will loop through the icon elements currently inside the tray and toggle display on whether or not it's the type in the parameter.
+
+We also need to make sure the different types of icons to not be seen on the tray at the same time, so set a global variable to tell the program which type of icons the board should display and accept if dropped back.
 
 * f10 - Implement individual controls
-When the user clicks on any character, two more buttons will appear. One is to mute the character sound, the other (solo) is to mute all other sounds.
+When the user clicks on any character or instrument, two more buttons will appear, and a global variable will store the selected unit. The function on click will also loop through the audio array to find the corresponding audio of the selected unit. One of the buttons is to mute the character sound, the other (solo) is to mute all other sounds.
 
-*f11 - Refine board logic
+When the mute button is clicked, it will set the muted property to the selected audio, if the selected audio is not muted, and vice versa.
+When the solo button is clicked, it will set true to a global variable to tell the program if any audio is on solo. NExt it will loop through the audio array, check if each audio is not the selected one, then set them to muted. The mute button will not be clickable if any of the audio is on solo, so change its CSS class to be so. Change the CSS class to the corresponding characters and instruments too so the user knows who is muted.
 
-Game begins
+While something is selected, users can't click to select another. They have to click the BACK button to deselect. This is to make things simple.
+
+To sum up, the board logic is as follows:
+
+When game begins (first loaded)
 => All icons are instruments
-Once first dragged and dropped to the DJ, shows: band member icons (instead)
 
-User taps on any playing unit (instruments/band)
-=> shows solo/mute
+Once first dragged and dropped to the DJ, shows: crewmen icons (instead)
 
-User taps on DJ’s instrument or the DJ’s zone
-=> selects the instrument/zone
-=> shows instrument icons
+User taps on any playing unit (instruments/crew)
+=> set selected to store the unit
+=> shows solo/mute buttons
 
-User taps on band members 
-=> selects the band member
-=> shows band icons
+	if user taps on DJ’s instrument or the DJ’s zone
+	=> selects the instrument/DJ's zone
+	=> shows only instrument icons
+	
+	if user taps on a crewman 
+	=> selects the crewman
+	=> shows only crew icons
 
 
-User drags an instrument over
-	board shows instruments
-	=> drop
-	board shows band
+User drags an instrument to the board
+	if board shows instruments
+	=> drop back
+	if board shows crewmen
 	=> not allowed
 
-User drags a band member over
-	board shows instruments
+User drags a crewman to the board
+	if board shows instruments
 	=> not allowed
-	board shows band
-	=> drop
+	if board shows crewmen
+	=> drop back
 
-Selected, user taps on the back button
+Selected an unit, user taps on the back button {
 	=> hides solo/mute
 	=> removes selection
-	board shows instruments
-	=> shows band member icons
 
-Zone selected, user drops an instrument to the DJ
-	=> selects the instrument instead of the zone
+	if board shows instruments
+	=> shows crewman icons
+}
+
+The DJ's empty zone selected, user drops an instrument to the DJ
+	=> selects the instrument instead of this zone
 
 User starts dragging on DJ’s instrument
-	board shows instruments
+	if board shows instruments
 	=> do nothing
-	board shows band
-	=> shows instruments temporarily
+	if board shows crewmen
+	=> shows instrument icons temporarily
 
 
 User ends dragging on DJ’s instrument
-	band members shown and selected
-	=> show band members again
 
-	not selected anything (else)
-	=> keeps showing instrument icons
+	if board shows crewmen before dragstart
+		a crewman is currently selected
+		=> show crewmen icons again
+	
+	if nothing is selected
+		=> keeps showing instrument icons
