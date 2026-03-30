@@ -184,7 +184,7 @@ function dropBack(e) {
         soloAudio();
     }
 
-    //console.log(`${dragItem.id} was dropped back to start`);
+    console.log(`${dragItem.id} was dropped back to start`);
     iconZone.appendChild(dragItem);
     dragItem.classList.remove("obj");   
     dragItem.classList.add("icon");     
@@ -258,7 +258,7 @@ function startAudio(elem) {
 // this button does what the function says
 function playPauseAudio() {
     audioElements.forEach((elem) => {
-       // change icon to play if the audio is paused, and vice versa
+       // changes icon to play if the audio is paused, and vice versa
         if(elem.paused){
             elem.play(); 
             playIcon.classList.add("st7");
@@ -273,7 +273,7 @@ function playPauseAudio() {
     })
 }
 
-// restart and set volume to all audios
+// rewinds all audios
 function rewindAudio() {
     audioElements.forEach((elem) => {
         if(elem.classList.contains("band"))
@@ -283,6 +283,7 @@ function rewindAudio() {
     })
 }
 
+// sets volume to all audios
 function setVolume() {
     changeVolumeBar();
     audioElements.forEach((elem) => {
@@ -303,7 +304,7 @@ function clickBrighten() {
 }
 
 // Animations for the DJ 
-// (won't play if not an instrument dragged over)
+// (won't play if non-instrument is dragged over)
 function playDjAnim() {
     if(dragItem.classList.contains("band")) return;
     if(musicZone.firstElementChild) return;
@@ -332,8 +333,8 @@ function showIconsByClass(type) {
     }
 }
 
-// show instrument board if an instrument is dragged
-// hide the instrument board again if the instrument is not dropped back
+// shows instrument board if an instrument is dragged
+// hides the instrument board again if the instrument is not dropped back
 function dragInstrument(e) {
   if (e.type == "dragstart") {
     showIconsByClass("instrument");
@@ -573,7 +574,6 @@ dropZones.forEach((elem) => {
     elem.addEventListener("dragenter", showPreview);
     elem.addEventListener("dragleave", hidePreview);
     elem.addEventListener("drop", dropBand);
-    //elem.addEventListener("click", showSpecificControls);
 })
 
 musicZone.addEventListener("dragover", defPrevent); 
