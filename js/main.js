@@ -130,12 +130,12 @@ function visibleDrag() {
     dragItem.classList.toggle("no-display");
 }
 
-// prevent default behaviors of the dragover event
+// prevents default behaviors of the dragover event
 function defPrevent(e) {
     e.preventDefault();
 }
 
-// show a preview of the character on dragover
+// shows a preview of the character on dragover
 function showPreview() {
     if(dragItem.classList.contains("instrument")) return;
     if(this.firstElementChild) return;
@@ -156,7 +156,7 @@ function hidePreview(e) {
 
 }
 
-// attach the icon into the drop zone and change it to the character
+// attaches the icon into the drop zone and change it to the character
 function dropBand(e) {
     e.preventDefault();
     if(dragItem.classList.contains("instrument")){
@@ -175,7 +175,7 @@ function dropMusic(e) {
         return;
     }
 
-    // show the band member icons again
+    // shows the band member icons again
     appendAudio(this);
     
     mainDjCon.classList.remove("highlight");
@@ -282,7 +282,7 @@ function dropBack(e) {
 
 
 
-// add a new audio layer for a character on drop zone
+// adds a new audio layer for a character on drop zone
 function startAudio(elem) {
    let audioFile = elem.dataset.audio;
    if(!audioFile) return;
@@ -321,7 +321,7 @@ function startAudio(elem) {
 
 // this button will affect all audios
 function playPauseAudio() {
-    // change icon to play if the audio is paused, and vice versa
+    // changes icon to play if the audio is paused, and vice versa
 
     if(!hasAnyAudioStarted){
         audioElements.forEach((elem) => {
@@ -352,7 +352,7 @@ function playPauseAudio() {
     }
 }
 
-// restart and set volume to all audios
+// rewinds and sets volume to all audios
 function rewindAudio() {
     if(gameState==0) return;
 
@@ -430,11 +430,11 @@ function dragInstrument(e) {
   }
 }
 
-// show or hide specific audio controls (mute/solo)
+// shows or hides specific audio controls (mute/solo)
 function showSpecificControls() {
     if(gameState == 0) return;
 
-    // prevents user selecting another unit without pressing return
+    // prevents user selecting another unit without clicking return
     if(selected) {
         if(!this.contains(selected)){
             selected.classList.remove("emphasized");
@@ -452,7 +452,7 @@ function showSpecificControls() {
 
     selected.classList.add("selected");
 
-    // shows only its type (instruments/band members) on board
+    // shows only its type (instruments/crew) on board
     if(selected.classList.contains("instrument")){
         showIconsByClass("instrument");
         playSfx("selected.ogg");
@@ -467,7 +467,7 @@ function showSpecificControls() {
     volumeCon.classList.add("hidden");
     buttonCon.classList.remove("hidden");
 
-    // for the DJ's zone without an instrument, these can't be clicked
+    // for the DJ's zone without an instrument, these buttons can't be clicked, as there's nothing in it to control thought it's still selectable!
     if(selected == musicZone) {
         muteBtn.classList.add("deactivated");
         soloBtn.classList.add("deactivated");
@@ -539,7 +539,7 @@ function muteAudio() {
     }
 }
 
-// this one has the highest priority, even over mute
+// this button has the higher priority over mute
 function soloAudio() {
     if(!selectedAudio) return;
     if(!isAnyAudioSolo){
@@ -590,7 +590,7 @@ function soloAudio() {
     }
 }
 
-// Play random ambience sounds
+// Plays random ambience sounds
 function playAmbience() {
     if(currentUnits.length > 0) return;
     let randomNum = Math.floor(Math.random() * 3) + 1;
@@ -637,7 +637,6 @@ dropZones.forEach((elem) => {
     elem.addEventListener("dragenter", showPreview);
     elem.addEventListener("dragleave", hidePreview);
     elem.addEventListener("drop", dropBand);
-    //elem.addEventListener("click", showSpecificControls);
 })
 
 musicZone.addEventListener("dragover", defPrevent); 
