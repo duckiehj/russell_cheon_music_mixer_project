@@ -349,7 +349,7 @@ function playPauseAudio(showPlayText=true) {
 
         if(gameState == 0) return;
             mainDj.classList.remove("dj-playing");
-            dialogue.showQuickSpeech(`Belay choir, ye.`);
+            dialogue.showQuickSpeech(`All hands, belay choir.`);
     }
 }
 
