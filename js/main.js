@@ -309,8 +309,7 @@ function startAudio(elem) {
     audioItem.load();
     audioItem.volume = volSlider.value/100;
 
-    hasAnyAudioStarted = false;
-    playPauseAudio(false);
+    if(hasAnyAudioStarted) audioItem.play();
 
     if(isAnyAudioSolo) {
         audioItem.muted = true;
@@ -320,7 +319,7 @@ function startAudio(elem) {
 }
 
 // this button will affect all audios
-function playPauseAudio(showPlayText=true) {
+function playPauseAudio() {
     // changes icon to play if the audio is paused, and vice versa
     
     if(!hasAnyAudioStarted){
@@ -335,7 +334,6 @@ function playPauseAudio(showPlayText=true) {
 
         if(gameState == 0) return;
             mainDj.classList.add("dj-playing");
-        if(showPlayText)
             dialogue.showQuickSpeech(`Aye aye, commence.`);
     } else {
         audioElements.forEach((elem) => {
