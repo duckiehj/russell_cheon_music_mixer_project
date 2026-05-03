@@ -365,6 +365,7 @@ function rewindAudio() {
     })
 }
 
+// sets volume to all audios
 function setVolume() {
     changeVolumeBar();
     audioElements.forEach((elem) => {
@@ -385,7 +386,7 @@ function clickBrighten() {
 }
 
 // Animations for the DJ 
-// (won't play if not an instrument dragged over)
+// (won't play if non-instrument is dragged over)
 function playDjAnim() {
     if(dragItem.classList.contains("band")) return;
     if(musicZone.firstElementChild) return;
@@ -414,8 +415,8 @@ function showIconsByClass(type) {
     }
 }
 
-// show instrument board if an instrument is dragged
-// hide the instrument board again if the instrument is not dropped back
+// shows instrument board if an instrument is dragged
+// hides the instrument board again if the instrument is not dropped back
 function dragInstrument(e) {
   if (e.type == "dragstart") {
     showIconsByClass("instrument");
