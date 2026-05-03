@@ -176,6 +176,9 @@ function dropMusic(e) {
     }
 
     // shows the band member icons again
+    if(gameState == 0) {
+        hasAnyAudioStarted = true;
+    }
     appendAudio(this);
     
     mainDjCon.classList.remove("highlight");
