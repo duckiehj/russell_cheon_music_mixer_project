@@ -73,8 +73,10 @@ h2 {
 
 #speech {
     font-size: clamp(13px, 1.5rem, 16px);
+    min-width: 70%;
     padding: 2vw;
     background-color: #a4ff7a;
+    align-self: end;
     border-radius: 15px;
     margin: 0 2.2rem 2rem 3.2rem;
     position: relative;
@@ -83,6 +85,11 @@ h2 {
     animation: djanimation ease-in-out 2s infinite;
 }
 
+#speech:has(span) {
+    line-height: 2rem;
+}
+
+/* speech bubbles, courtesy of https://projects.verou.me/bubbly/ */
 #speech:after {
 	content: '';
 	position: absolute;
@@ -104,6 +111,12 @@ h2 {
     height: 40%;
     align-self: flex-end;
     cursor: pointer;
+}
+
+.subspeech {
+    font-size: 1.35rem;
+    font-style: italic;
+    font-weight: bold;   
 }
 
 @media screen and (min-width: 1200px) {
